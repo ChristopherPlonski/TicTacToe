@@ -7,7 +7,7 @@ using namespace std;
 int main() {
 	cout << "--Testing Board." << endl;
 
-	Board board = Board(3);
+	Board board = Board();
 
 	board.mark_pos(1, 'X');
 	assert(board.get_mark_at_pos(1) == 'X');

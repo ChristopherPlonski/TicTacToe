@@ -4,12 +4,14 @@
 
 using namespace std;
 
-Board::Board(int boardSize) : BOARD_SIZE(boardSize) {
-	this->current_mark_grid = new char*[boardSize];
+Board::Board() {
+	this->current_mark_grid = new char*[BOARD_SIZE];
 
-	for (int i = 0; i < boardSize; i++) {
-		current_mark_grid[i] = new char[boardSize];
+	for (int i = 0; i < BOARD_SIZE; i++) {
+		current_mark_grid[i] = new char[BOARD_SIZE];
 	}
+
+	clear_board();
 }
 
 Board::~Board()
@@ -21,12 +23,12 @@ Board::~Board()
 	delete[] current_mark_grid;
 }
 
-int Board::get_row_index_from_board_pos(int boardPos) {
+int Board::get_row_index_from_board_pos(int boardPos) const {
 	int index = boardPos - 1;
 	return index / BOARD_SIZE;
 }
 
-int Board::get_column_index_from_board_pos(int boardPos) {
+int Board::get_column_index_from_board_pos(int boardPos) const {
 	int index = boardPos - 1;
 	return index % BOARD_SIZE;
 }
@@ -59,6 +61,17 @@ char Board::get_mark_at_pos(int boardPos)
 	int column = get_column_index_from_board_pos(boardPos);
 
 	return this->current_mark_grid[row][column];
+}
+
+char Board::get_mark_at_pos(int rowIndex, int columnIndex)
+{
+	if (rowIndex < 0 || rowIndex > BOARD_SIZE - 1 || columnIndex < 0 || columnIndex > BOARD_SIZE - 1) {
+		cout << "Index is out of bounds!";
+		throw out_of_range("Index is out of bounds.");
+		return NULL;
+	}
+
+	return this->current_mark_grid[rowIndex][columnIndex];
 }
 
 void Board::clear_board()

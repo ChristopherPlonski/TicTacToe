@@ -4,17 +4,18 @@
 class Board {
 
 public:
-	Board(int boardSize = 3);
+	Board();
 	~Board();
 	void mark_pos(int boardPos, char mark);
 	char get_mark_at_pos(int boardPos);
+	char get_mark_at_pos(int rowIndex, int columnIndex);
 	void clear_board();
-	const int BOARD_SIZE;
+	static const int BOARD_SIZE = 3;
 
 private:
 	char** current_mark_grid;
-	int get_row_index_from_board_pos(int position);
-	int get_column_index_from_board_pos(int position);
+	int get_row_index_from_board_pos(int position) const;
+	int get_column_index_from_board_pos(int position) const;
 };
 
 #endif // !BOARD_H
