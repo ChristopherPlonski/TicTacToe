@@ -33,10 +33,28 @@ int Board::get_column_index_from_board_pos(int boardPos) const {
 	return index % BOARD_SIZE;
 }
 
+bool Board::is_pos_in_board_bounds(int boardPos)
+{
+	if (boardPos < 1 || boardPos > BOARD_SIZE * BOARD_SIZE) {
+		return false;
+	}
+
+	return true;
+}
+
+bool Board::is_pos_in_board_bounds(int rowIndex, int columnIndex)
+{
+	if (rowIndex < 0 || rowIndex > BOARD_SIZE - 1 || columnIndex < 0 || columnIndex > BOARD_SIZE - 1) {
+		return false;
+	}
+
+	return true;
+}
+
 
 void Board::mark_pos(int boardPos, char mark)
 {
-	if (boardPos < 1 || boardPos > BOARD_SIZE * BOARD_SIZE) {
+	if (!is_pos_in_board_bounds(boardPos)) {
 		cout << "Index is out of bounds!";
 		throw out_of_range("Index is out of bounds.");
 		return;
@@ -50,7 +68,7 @@ void Board::mark_pos(int boardPos, char mark)
 
 char Board::get_mark_at_pos(int boardPos)
 {
-	if (boardPos < 1 || boardPos > BOARD_SIZE * BOARD_SIZE) {
+	if (!is_pos_in_board_bounds(boardPos)) {
 		cout << "Index is out of bounds!";
 		throw out_of_range("Index is out of bounds.");
 		return NULL;
@@ -65,7 +83,7 @@ char Board::get_mark_at_pos(int boardPos)
 
 char Board::get_mark_at_pos(int rowIndex, int columnIndex)
 {
-	if (rowIndex < 0 || rowIndex > BOARD_SIZE - 1 || columnIndex < 0 || columnIndex > BOARD_SIZE - 1) {
+	if (!is_pos_in_board_bounds(rowIndex, columnIndex)) {
 		cout << "Index is out of bounds!";
 		throw out_of_range("Index is out of bounds.");
 		return NULL;

@@ -29,6 +29,29 @@ int main() {
 	assert(game_state.get_current_state() == GameState::State::InProgress);
 	board.mark_pos(3, 'O');
 	assert(game_state.get_current_state() == GameState::State::Player2Win);
+	
+	board.clear_board();
+	assert(game_state.get_current_state() == GameState::State::InProgress);
+
+	// Testing a draw
+	board.mark_pos(1, 'X');
+	assert(game_state.get_current_state() == GameState::State::InProgress);
+	board.mark_pos(2, 'O');
+	assert(game_state.get_current_state() == GameState::State::InProgress);
+	board.mark_pos(3, 'X');
+	assert(game_state.get_current_state() == GameState::State::InProgress);
+	board.mark_pos(4, 'O');
+	assert(game_state.get_current_state() == GameState::State::InProgress);
+	board.mark_pos(5, 'X');
+	assert(game_state.get_current_state() == GameState::State::InProgress);
+	board.mark_pos(6, 'O');
+	assert(game_state.get_current_state() == GameState::State::InProgress);
+	board.mark_pos(7, 'O');
+	assert(game_state.get_current_state() == GameState::State::InProgress);
+	board.mark_pos(8, 'X');
+	assert(game_state.get_current_state() == GameState::State::InProgress);
+	board.mark_pos(9, 'O');
+	assert(game_state.get_current_state() == GameState::State::Draw);
 
 	cout << "--GameState tests have passed!" << endl;
 }

@@ -21,6 +21,14 @@ int main() {
 	board.clear_board();
 	assert(board.get_mark_at_pos(1) == NULL);
 
+	assert(board.is_pos_in_board_bounds(0) == false);
+	assert(board.is_pos_in_board_bounds(10) == false);
+	assert(board.is_pos_in_board_bounds(100) == false);
+	assert(board.is_pos_in_board_bounds(-100) == false);
+	assert(board.is_pos_in_board_bounds(1) == true);
+	assert(board.is_pos_in_board_bounds(9) == true);
+	assert(board.is_pos_in_board_bounds(5) == true);
+
 	cout << "--Board tests have passed!" << endl;
 	return 0;
 }
