@@ -25,5 +25,21 @@ int main() {
 	}
 
 	cout << console.display();
-	cout << "Good game! \n";
+	cout << "Good game! ";
+
+	switch (gameState.get_current_state())
+	{
+	case GameState::State::Draw:
+		cout << "It was a draw. \n";
+		break;
+	case GameState::State::Player1Win:
+		cout << "Player 1 won!";
+		break;
+	case GameState::State::Player2Win:
+		cout << "Player 2 won!";
+		break;
+	default:
+		cout << "Unkown.";
+		break;
+	}
 }
