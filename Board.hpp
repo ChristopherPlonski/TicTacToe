@@ -11,6 +11,8 @@ public:
 	char get_mark_at_pos(int rowIndex, int columnIndex);
 	bool is_pos_in_board_bounds(int boardPos);
 	bool is_pos_in_board_bounds(int rowIndex, int columnIndex);
+	bool is_pos_in_board_occupied(int boardPos);
+	bool is_pos_in_board_occupied(int rowIndex, int columnIndex);
 	void clear_board();
 	static const int BOARD_SIZE = 3;
 

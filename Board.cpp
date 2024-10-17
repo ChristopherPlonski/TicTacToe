@@ -51,6 +51,37 @@ bool Board::is_pos_in_board_bounds(int rowIndex, int columnIndex)
 	return true;
 }
 
+bool Board::is_pos_in_board_occupied(int boardPos)
+{
+	if (!is_pos_in_board_bounds(boardPos)) {
+		cout << "Index is out of bounds!";
+		throw out_of_range("Index is out of bounds.");
+		return false;
+	}
+
+	if (get_mark_at_pos(boardPos) == NULL) {
+		// This tile is not occupied
+		return false;
+	}
+
+	return true;
+}
+
+bool Board::is_pos_in_board_occupied(int rowIndex, int columnIndex)
+{
+	if (!is_pos_in_board_bounds(rowIndex, columnIndex)) {
+		cout << "Indexes are out of bounds!";
+		throw out_of_range("Index is out of bounds.");
+		return false;
+	}
+
+	if (get_mark_at_pos(rowIndex, columnIndex) == NULL) {
+		// This tile is not occupied
+		return false;
+	}
+
+	return true;
+}
 
 void Board::mark_pos(int boardPos, char mark)
 {
@@ -84,7 +115,7 @@ char Board::get_mark_at_pos(int boardPos)
 char Board::get_mark_at_pos(int rowIndex, int columnIndex)
 {
 	if (!is_pos_in_board_bounds(rowIndex, columnIndex)) {
-		cout << "Index is out of bounds!";
+		cout << "Indexes are out of bounds!";
 		throw out_of_range("Index is out of bounds.");
 		return NULL;
 	}

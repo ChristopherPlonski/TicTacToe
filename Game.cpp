@@ -1,38 +1,70 @@
 #include <iostream>
 
 #include "Game.hpp"
-#include "Board.hpp"
-#include "Console.hpp"
-#include "GameState.hpp"
-#include "Validator.hpp"
-#include "Player.hpp"
 
 using namespace std;
 
 void Game::start_game_loop()
 {
-	Board board = Board();
-	Console console = Console(&board);
-	GameState gameState = GameState(&board);
-	Player player1 = Player('X', &board);
-	Player player2 = Player('O', &board);
+	Board* board = new Board();
+	Console console = Console(board);
+	GameState gameState = GameState(board);
+	Player player1 = Player('X', 1, board);
+	Player player2 = Player('O', 2, board);
 
 	cout << "Welcome to Tic-Tac-Toe! \n";
 
-	while (gameState.get_current_state() == GameState::State::InProgress) {
-		cout << console.display();
+	bool keepPlaying = true;
 
-		int userMove = player1.get_move();
+	while (keepPlaying) {
+		start_game(board, &console, &gameState, &player1, &player2);
+
+		string userResponse;
+
+		cout << "Would you like to continue playing? Type 'no' to stop. Type anything else to continue.";
+		getline(cin, userResponse);
+		
+		if (userResponse == "no") {
+			keepPlaying = false;
+		}
+	}
+}
+
+void start_game(Board* board, Console* console, GameState* gameState, Player* player1, Player* player2) {
+	Player* currentPlayer = player1;
+
+	while (gameState->get_current_state() == GameState::State::InProgress) {
+		cout << console->display();
+
+		bool gotValidMove = false;
+		int userMove = -1;
+
+		while (!gotValidMove) {
+			userMove = currentPlayer->get_move();
+
+			if (!board->is_pos_in_board_bounds(userMove)) {
+				cout << "Provided number (" << userMove << ") is out of board bounds. \n";
+			}
+			else if (board->is_pos_in_board_occupied(userMove)) {
+				cout << "Tile at number: " << userMove << " is already occupied. \n";
+			}
+			else {
+				gotValidMove = true;
+			}
+		}
 
 		cout << "User move: " << userMove << endl;
 
-		board.mark_pos(userMove, 'X');
+		board->mark_pos(userMove, currentPlayer->get_marker());
+
+		// Swap currentPlayer
+		currentPlayer = currentPlayer == player1 ? player2 : player1;
 	}
 
-	cout << console.display();
+	cout << console->display();
 	cout << "Good game! ";
 
-	switch (gameState.get_current_state())
+	switch (gameState->get_current_state())
 	{
 	case GameState::State::Draw:
 		cout << "It was a draw. \n";

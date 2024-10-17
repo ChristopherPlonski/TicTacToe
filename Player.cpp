@@ -3,23 +3,23 @@
 #include <optional>
 
 #include "Player.hpp"
-#include "Validator.hpp"
 #include "StringConverter.hpp"
 
 using namespace std;
 
-Player::Player(char playerMarker, Board* board)
+Player::Player(char playerMarker, int playerNumber, Board* board)
 {
 	this->playerMarker = playerMarker;
+	this->playerNumber = playerNumber;
 	this->board = board;
 }
 
 int Player::get_move() {
-	bool gotValidMove = false;
+	bool gotValidIntMove = false;
 	int userValidMove;
 
-	while (!gotValidMove) {
-		cout << "Where do you want to make your mark? ";
+	while (!gotValidIntMove) {
+		cout << "Player #" << playerNumber << ", where do you want to make your mark? ";
 
 		string userStringInput;
 		getline(cin, userStringInput);
@@ -30,18 +30,15 @@ int Player::get_move() {
 			cout << "Provided input was not a valid number. \n";
 		}
 		else {
-			bool isIntInputValid = Validator::is_user_move_input_valid(optionalUserIntInput.value(), board);
-
-			if(!isIntInputValid){
-				// Do nothing, user was already notified.
-			}
-			else {
-				// Valid input!
-				gotValidMove = true;
-				userValidMove = optionalUserIntInput.value();
-			}
+			gotValidIntMove = true;
+			userValidMove = optionalUserIntInput.value();
 		}
 	}
 
 	return userValidMove;
+}
+
+char Player::get_marker()
+{
+	return this->playerMarker;
 }
