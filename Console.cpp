@@ -20,10 +20,10 @@ string Console::get_horizontal_separator() const
 
 	// Dash formula: 3 dashes for each tile, and 1 dash for every vertical separator (AKA: boardSize - 1)
 	for (int i = 0; i < board->BOARD_SIZE; i++) {
-		horizontalSeparator += "---";
+		horizontalSeparator += HORIZONTAL_SYMBOL + HORIZONTAL_SYMBOL + HORIZONTAL_SYMBOL;
 
 		if (i > 0) {
-			horizontalSeparator += "-";
+			horizontalSeparator += HORIZONTAL_SYMBOL;
 		}
 	}
 
@@ -44,7 +44,7 @@ string Console::display()
 			int tileNumber = (i * BOARD_SIZE) + (j+1);
 			//cout << "Checking tileNumber: " << tileNumber;
 			if (j == 0) {
-				output += "| ";
+				output += VERTICAL_SYMBOL + " ";
 			}
 
 			char markAtPos = board->get_mark_at_pos(tileNumber);
@@ -57,7 +57,11 @@ string Console::display()
 				stringToDisplay = string(1, markAtPos);
 			}
 
-			output += stringToDisplay + " | ";
+			output += stringToDisplay + " " + VERTICAL_SYMBOL;
+
+			if (j < BOARD_SIZE - 1) {
+				output += " ";
+			}
 		}
 
 		output += "\n" + get_horizontal_separator() + "\n";

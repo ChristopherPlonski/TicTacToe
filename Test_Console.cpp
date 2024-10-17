@@ -10,7 +10,11 @@ int main() {
 	Board board = Board();
 	Console console = Console(&board);
 
-	assert(console.display() == "1 | 2 | 3 \n ----------- \n4 | 5 | 6 \n ----------- \n7 | 8 | 9 \n");
+	assert(console.display() == "+-----------+\n| 1 | 2 | 3 |\n+-----------+\n| 4 | 5 | 6 |\n+-----------+\n| 7 | 8 | 9 |\n+-----------+\n");
+	board.mark_pos(1, 'X');
+	assert(console.display() == "+-----------+\n| X | 2 | 3 |\n+-----------+\n| 4 | 5 | 6 |\n+-----------+\n| 7 | 8 | 9 |\n+-----------+\n");
+	board.mark_pos(5, 'O');
+	assert(console.display() == "+-----------+\n| X | 2 | 3 |\n+-----------+\n| 4 | O | 6 |\n+-----------+\n| 7 | 8 | 9 |\n+-----------+\n");
 
 	cout << "--Console tests have passed!" << endl;
 	return 0;

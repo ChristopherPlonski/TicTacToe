@@ -2,24 +2,24 @@
 #include <string>
 #include <optional>
 
-#include "Player.hpp"
+#include "HumanPlayer.hpp"
 #include "StringConverter.hpp"
 
 using namespace std;
 
-Player::Player(char playerMarker, int playerNumber, Board* board)
+HumanPlayer::HumanPlayer(char playerMarker, int playerNumber, Board* board)
 {
 	this->playerMarker = playerMarker;
 	this->playerNumber = playerNumber;
 	this->board = board;
 }
 
-int Player::get_move() {
+int HumanPlayer::get_move() {
 	bool gotValidIntMove = false;
 	int userValidMove;
 
 	while (!gotValidIntMove) {
-		cout << "Player #" << playerNumber << ", where do you want to make your mark? ";
+		cout << "Player #" << playerNumber << " (" << playerMarker << "), where do you want to make your mark? ";
 
 		string userStringInput;
 		getline(cin, userStringInput);
@@ -38,7 +38,11 @@ int Player::get_move() {
 	return userValidMove;
 }
 
-char Player::get_marker()
+char HumanPlayer::get_marker()
 {
 	return this->playerMarker;
+}
+
+int HumanPlayer::get_number() {
+	return this->playerNumber;
 }

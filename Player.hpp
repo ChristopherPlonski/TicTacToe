@@ -1,19 +1,12 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "Board.hpp"
-
 class Player {
 
 public:
-	explicit Player(char playerMarker, int playerNumber, Board* board);
-	int get_move();
-	char get_marker();
+	virtual int get_move() = 0;
+	virtual char get_marker() = 0;
 
-private:
-	Board* board;
-	char playerMarker;
-	int playerNumber;
 };
 
 #endif // !PLAYER_H
