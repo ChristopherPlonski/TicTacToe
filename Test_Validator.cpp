@@ -9,12 +9,11 @@ int main() {
 	cout << "--Testing Validator \n";
 
 	Board board = Board();
-	Validator validator = Validator(&board);
 
 	bool isTesting = true;
 	while (isTesting) {
 		cout << "\n Testing board with size 3x3. \n";
-		int userMove = validator.get_move();
+		int userMove = Validator::is_user_move_input_valid(1, board);
 		cout << "User inputted move: " << userMove << endl;
 
 		string userInput;
