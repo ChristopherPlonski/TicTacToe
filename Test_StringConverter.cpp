@@ -15,6 +15,15 @@ int main() {
 	assert(StringConverter::try_get_int_from_string("?!!%$*") == nullopt);
 	assert(StringConverter::try_get_int_from_string("2040020420240024004200420") == nullopt);
 
+	assert(StringConverter::try_get_char_from_string("a") == 'a');
+	assert(StringConverter::try_get_char_from_string("!") == '!');
+	assert(StringConverter::try_get_char_from_string("C") == 'C');
+	assert(StringConverter::try_get_char_from_string("abc") == nullopt);
+	assert(StringConverter::try_get_char_from_string("hello world!") == nullopt);
+	assert(StringConverter::try_get_char_from_string("") == nullopt);
+	assert(StringConverter::try_get_char_from_string(" ") == nullopt);
+	assert(StringConverter::try_get_char_from_string("  ") == nullopt);
+
 	cout << "--StringConverter tests have passed! \n";
 	return 0;
 }
