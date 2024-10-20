@@ -60,6 +60,7 @@ GameState::State GameState::get_state_from_mark_array(char markArray[])
 	//cout << "P1Marks: " << numberOfP1Marks << endl;
 	//cout << "P2Marks: " << numberOfP2Marks << endl;
 	// Could remove if statements since already returning, but will keep for readability sake.
+	// Also, currently there will ever only be 2 players, but since Game has a vector of players, that could change, so make sure this changes too.
 	if (numberOfP2Marks == 0) {
 		return State::Player1Win;
 	}

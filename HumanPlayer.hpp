@@ -10,6 +10,8 @@ public:
 	explicit HumanPlayer(char playerMarker, int playerNumber, Board* board);
 	int get_move() override;
 	char get_marker() override;
+	static char prompt_new_marker(int playerNumber);
+	char prompt_new_marker();
 	int get_number();
 
 private:
