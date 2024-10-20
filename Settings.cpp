@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-char Settings::get_valid_marker_from_human_player(HumanPlayer* humanPlayerToGetMarkerFor, vector<Player>* allPlayersVector)
+char Settings::get_valid_marker_from_human_player(HumanPlayer* humanPlayerToGetMarkerFor, vector<Player*>* allPlayersVector)
 {
 	bool gotValidMarker = false;
 	char validPlayerMarker;
@@ -24,7 +24,7 @@ char Settings::get_valid_marker_from_human_player(HumanPlayer* humanPlayerToGetM
 	return validPlayerMarker;
 }
 
-char Settings::get_valid_marker_for_human_player(int playerNumber, vector<Player>* allPlayersVector)
+char Settings::get_valid_marker_for_human_player(int playerNumber, vector<Player*>* allPlayersVector)
 {
 	bool gotValidMarker = false;
 	char validPlayerMarker;
@@ -46,14 +46,14 @@ char Settings::get_valid_marker_for_human_player(int playerNumber, vector<Player
 	return validPlayerMarker;
 }
 
-bool Settings::is_player_marker_unique(char playerMarker, Player* playerOfMarkerToCheck, vector<Player>* allPlayersVector)
+bool Settings::is_player_marker_unique(char playerMarker, Player* playerOfMarkerToCheck, vector<Player*>* allPlayersVector)
 {
 	for (int i = 0; i < allPlayersVector->size(); i++) {
-		Player* playerToCheck = &allPlayersVector->at(i);
+		Player* playerToCheck = allPlayersVector->at(i);
 
 		if (playerToCheck != playerOfMarkerToCheck) {
 			char otherPlayerMarker = playerToCheck->get_marker();
-			cout << "Checking Player #" << i;
+			//cout << "Checking Player #" << i+1 << endl;
 			if (playerMarker == otherPlayerMarker) {
 				return false;
 			}

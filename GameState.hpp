@@ -2,14 +2,16 @@
 #define GAMESTATE_H
 
 #include <vector>
+
 #include "Board.hpp"
+#include "Player.hpp"
 
 using namespace std;
 
 class GameState {
 
 public:
-	GameState(Board* board);
+	GameState(Board* board, vector<Player*>* playersVector);
 	enum State {
 		Player1Win,
 		Player2Win,
@@ -28,6 +30,7 @@ private:
 	State get_state_from_diagonals();
 	State currentState;
 	Board* board;
+	vector<Player*>* playersVector;
 };
 
 #endif // !GAMESTATE_H

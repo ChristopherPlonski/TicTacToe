@@ -44,7 +44,7 @@ char HumanPlayer::prompt_new_marker(int playerNumber)
 	char userValidMarker;
 
 	while (!gotValidMarker) {
-		cout << "Player #" << playerNumber << ", what do you want your marker to be (Req: 1 character, not blank) ?\n ";
+		cout << "Player #" << playerNumber << ", what do you want your marker to be (Req: 1 character, not blank, and unique): \n";
 
 		string userStringInput;
 		getline(cin, userStringInput);

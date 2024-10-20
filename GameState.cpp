@@ -5,10 +5,11 @@
 
 using namespace std;
 
-GameState::GameState(Board* board)
+GameState::GameState(Board* board, vector<Player*>* playersVector)
 {
 	this->currentState = State::InProgress;
 	this->board = board;
+	this->playersVector = playersVector;
 }
 
 GameState::State GameState::get_current_state()
@@ -44,10 +45,11 @@ GameState::State GameState::get_state_from_mark_array(char markArray[])
 			return State::InProgress;
 		}
 		else {
-			if (markToCheck == 'X') {
+			// Will eventually have to refactor once add the ability to have >1 player.
+			if (markToCheck == playersVector->at(0)->get_marker()) {
 				numberOfP1Marks++;
 			}
-			else if (markToCheck == 'O') {
+			else if (markToCheck == playersVector->at(1)->get_marker()) {
 				numberOfP2Marks++;
 			}
 			else {
