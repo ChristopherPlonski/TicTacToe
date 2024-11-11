@@ -1,10 +1,12 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include "Move.hpp"
+
 class Player {
 
 public:
-	virtual int get_move() = 0;
+	virtual Move get_move() = 0;
 	virtual char get_marker() = 0;
 
 };
