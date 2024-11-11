@@ -54,6 +54,6 @@ string StringConverter::to_lowercase(const string stringToConvert)
 	for (const char &character : stringToConvert) {
 		lowercaseString += tolower(character);
 	}
-
+	
 	return lowercaseString;
 }

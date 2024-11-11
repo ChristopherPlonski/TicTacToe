@@ -31,7 +31,7 @@ int main() {
 	assert(StringConverter::to_lowercase("A") == "a");
 	assert(StringConverter::to_lowercase("a") == "a");
 	assert(StringConverter::to_lowercase(" ") == " ");
-	assert(StringConverter::to_lowercase("HelLo WoRLd!?") == "hello world!?");
+	assert(StringConverter::to_lowercase("HelLo WoRLd!? ") == "hello world!? ");
 
 	cout << "--StringConverter tests have passed! \n";
 	return 0;
