@@ -14,7 +14,7 @@ HumanPlayer::HumanPlayer(char playerMarker, int playerNumber, Board* board)
 	this->board = board;
 }
 
-int HumanPlayer::get_move() {
+Move HumanPlayer::get_move() {
 	bool gotValidIntMove = false;
 	int userValidMove;
 
@@ -35,7 +35,7 @@ int HumanPlayer::get_move() {
 		}
 	}
 
-	return userValidMove;
+	return Move(userValidMove);
 }
 
 char HumanPlayer::prompt_new_marker(int playerNumber)

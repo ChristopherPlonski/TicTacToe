@@ -8,7 +8,7 @@ class HumanPlayer : public Player {
 
 public:
 	explicit HumanPlayer(char playerMarker, int playerNumber, Board* board);
-	int get_move() override;
+	Move get_move() override;
 	char get_marker() override;
 	static char prompt_new_marker(int playerNumber);
 	char prompt_new_marker();
@@ -18,6 +18,7 @@ private:
 	Board* board;
 	char playerMarker;
 	int playerNumber;
+
 };
 
 #endif // !HUMANPLAYER_H
