@@ -16,7 +16,8 @@ public:
 	void start_game_loop();
 
 private:
-	void start_game(Board* board, Console* console, GameState* gameState, vector<Player*>* playersVector);
+	void start_game(Board &board, Console &console, GameState &gameState, vector<Player*> &playersVector);
+	Move get_valid_player_move(Player &player, Board &board);
 	const int NUM_PLAYERS = 2;
 };
 

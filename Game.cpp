@@ -4,6 +4,7 @@
 #include "HumanPlayer.hpp"
 #include "Settings.hpp"
 #include "StringConverter.hpp"
+#include "MoveValidator.hpp"
 
 using namespace std;
 
@@ -30,7 +31,7 @@ void Game::start_game_loop()
 	bool keepPlaying = true;
 
 	while (keepPlaying) {
-		start_game(board, &console, &gameState, playersVector);
+		start_game(*board, console, gameState, *playersVector);
 
 		string userResponse;
 
@@ -46,37 +47,27 @@ void Game::start_game_loop()
 	}
 }
 
-void Game::start_game(Board* board, Console* console, GameState* gameState, vector<Player*>* playersVector) {
+void Game::start_game(Board &board, Console &console, GameState &gameState, vector<Player*> &playersVector) {
 	int currentPlayerIndex = 0;
 
-	while (gameState->get_current_state() == GameState::State::InProgress) {
-		Player* currentPlayer = playersVector->at(currentPlayerIndex);
+	while (gameState.get_current_state() == GameState::State::InProgress) {
+		Player* currentPlayer = playersVector.at(currentPlayerIndex);
 
-		cout << console->display();
+		cout << console.display();
 
-		bool gotValidMove = false;
-		int userMove = -1;
+		Move userMove = get_valid_player_move(*currentPlayer, board);
 
-		while (!gotValidMove) {
-			userMove = currentPlayer->get_move();
+		bool userDidMarkMove = userMove.get_optional_mark_position().has_value();
 
-			if (!board->is_pos_in_board_bounds(userMove)) {
-				cout << "Provided number (" << userMove << ") is out of board bounds. \n";
-			}
-			else if (board->is_pos_in_board_occupied(userMove)) {
-				cout << "Tile at number: " << userMove << " is already occupied. \n";
-			}
-			else {
-				gotValidMove = true;
-			}
+		if (userDidMarkMove) {
+			int userMoveNumber = userMove.get_optional_mark_position().value();
+			cout << "User move: " << userMoveNumber << endl;
+			board.mark_pos(userMoveNumber, currentPlayer->get_marker());
 		}
 
-		cout << "User move: " << userMove << endl;
-
-		board->mark_pos(userMove, currentPlayer->get_marker());
 
 		// Set currentPlayer to next player
-		if (currentPlayerIndex == playersVector->size() - 1) {
+		if (currentPlayerIndex == playersVector.size() - 1) {
 			currentPlayerIndex = 0;
 		}
 		else {
@@ -84,19 +75,19 @@ void Game::start_game(Board* board, Console* console, GameState* gameState, vect
 		}
 	}
 
-	cout << console->display();
+	cout << console.display();
 	cout << "Good game! ";
 
-	switch (gameState->get_current_state())
+	switch (gameState.get_current_state())
 	{
 	case GameState::State::Draw:
 		cout << "It was a draw. \n";
 		break;
 	case GameState::State::Player1Win:
-		cout << "Player 1 (" << playersVector->at(0)->get_marker() << ") won!";
+		cout << "Player 1 (" << playersVector.at(0)->get_marker() << ") won!";
 		break;
 	case GameState::State::Player2Win:
-		cout << "Player 2 (" << playersVector->at(1)->get_marker() << ") won!";
+		cout << "Player 2 (" << playersVector.at(1)->get_marker() << ") won!";
 		break;
 	default:
 		cout << "Unknown result.";
@@ -104,4 +95,27 @@ void Game::start_game(Board* board, Console* console, GameState* gameState, vect
 	}
 
 	cout << endl;
+}
+
+Move Game::get_valid_player_move(Player& currentPlayer, Board& board)
+{
+	Move userMove;
+
+	bool gotValidMove = false;
+
+	while (!gotValidMove) {
+		userMove = currentPlayer.get_move();
+
+		pair<bool, string> validatorResult = MoveValidator::is_move_valid(userMove, board);
+		bool moveWasValid = validatorResult.first;
+		string moveResultText = validatorResult.second;
+
+		if (moveWasValid) {
+			gotValidMove = true;
+		}
+
+		cout << moveResultText;
+	}
+
+	return userMove;
 }
