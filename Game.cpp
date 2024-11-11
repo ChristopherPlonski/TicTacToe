@@ -3,6 +3,7 @@
 #include "Game.hpp"
 #include "HumanPlayer.hpp"
 #include "Settings.hpp"
+#include "StringConverter.hpp"
 
 using namespace std;
 
@@ -36,7 +37,7 @@ void Game::start_game_loop()
 		cout << "Would you like to continue playing? Type 'no' to stop. Type anything else to continue. ";
 		getline(cin, userResponse);
 		
-		if (userResponse == "no") {
+		if (StringConverter::to_lowercase(userResponse) == "no") {
 			keepPlaying = false;
 		}
 		else {

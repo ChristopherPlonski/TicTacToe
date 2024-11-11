@@ -1,7 +1,10 @@
 #include <iostream>
 #include <string>
+#include <algorithm>
 
 #include "StringConverter.hpp"
+
+using namespace std;
 
 // Checks if the string can be converted to an integer
 optional<int> StringConverter::try_get_int_from_string(const string stringToConvert)
@@ -42,4 +45,15 @@ optional<char> StringConverter::try_get_char_from_string(const string stringToCo
 	}
 
 	return stringToConvert[0];
+}
+
+string StringConverter::to_lowercase(const string stringToConvert)
+{
+	string lowercaseString = "";
+
+	for (const char &character : stringToConvert) {
+		lowercaseString += tolower(character);
+	}
+
+	return lowercaseString;
 }

@@ -24,6 +24,15 @@ int main() {
 	assert(StringConverter::try_get_char_from_string(" ") == nullopt);
 	assert(StringConverter::try_get_char_from_string("  ") == nullopt);
 
+	assert(StringConverter::to_lowercase("BOB") == "bob");
+	assert(StringConverter::to_lowercase("boB") == "bob");
+	assert(StringConverter::to_lowercase("Bob") == "bob");
+	assert(StringConverter::to_lowercase("Z") == "z");
+	assert(StringConverter::to_lowercase("A") == "a");
+	assert(StringConverter::to_lowercase("a") == "a");
+	assert(StringConverter::to_lowercase(" ") == " ");
+	assert(StringConverter::to_lowercase("HelLo WoRLd!?") == "hello world!?");
+
 	cout << "--StringConverter tests have passed! \n";
 	return 0;
 }
