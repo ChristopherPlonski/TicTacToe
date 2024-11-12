@@ -6,8 +6,19 @@
 class Player {
 
 public:
+	// TODO: IMPLEMENT "IMOVER" FOR THE VIRTUAL GET_MOVE().
+	Player(char playerMarker, int playerNumber);
 	virtual Move get_move() = 0;
-	virtual char get_marker() = 0;
+	char get_marker();
+	int get_number();
+
+protected:	
+	void set_player_marker(char playerMarker);
+	void set_player_number(int playerNumber);
+
+private:
+	char playerMarker;
+	int playerNumber;
 
 };
 
