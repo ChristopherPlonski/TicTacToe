@@ -2,6 +2,7 @@
 #define MOVE_H
 
 #include <optional>
+#include <ostream>
 
 using namespace std;
 
@@ -19,6 +20,9 @@ public:
 	explicit Move();
 	optional<int> get_optional_mark_position();
 	bool used_ability();
+
+	// Overloading the << operator
+	friend ostream& operator<<(ostream& os, const Move& move);
 
 private:
 	optional<int> optionalMarkPosition;

@@ -22,3 +22,16 @@ bool Move::used_ability()
 {
 	return this->usedAbility;
 }
+
+ostream& operator<<(ostream& os, const Move& move)
+{
+	os << "Move: ";
+	if (move.optionalMarkPosition.has_value()) {
+		os << "Mark @ " << move.optionalMarkPosition.value();
+	}
+	else {
+		os << "Used ability";
+	}
+
+	return os;
+}
