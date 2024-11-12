@@ -5,11 +5,11 @@
 
 using namespace std;
 
-GameState::GameState(Board* board, vector<Player*>* playersVector)
+GameState::GameState(Board &board, vector<Player*>& playersVector)
 {
 	this->currentState = State::InProgress;
-	this->board = board;
-	this->playersVector = playersVector;
+	this->board = &board;
+	this->playersVector = &playersVector;
 }
 
 GameState::State GameState::get_current_state()

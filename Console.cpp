@@ -3,9 +3,9 @@
 
 using namespace std;
 
-Console::Console(Board* board)
+Console::Console(Board &board)
 {
-	this->board = board;
+	this->board = &board;
 }
 
 /// <summary>

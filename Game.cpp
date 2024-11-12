@@ -11,7 +11,7 @@ using namespace std;
 void Game::start_game_loop()
 {
 	Board* board = new Board();
-	Console console = Console(board);
+	Console console = Console(*board);
 	Settings settings = Settings();
 
 	cout << "Welcome to Tic-Tac-Toe! \n";
@@ -22,11 +22,11 @@ void Game::start_game_loop()
 		int playerNumber = i + 1;
 		char playerMarker = settings.get_valid_marker_for_human_player(playerNumber, playersVector);
 
-		HumanPlayer* newPlayer = new HumanPlayer(playerMarker, playerNumber, board);
+		HumanPlayer* newPlayer = new HumanPlayer(playerMarker, playerNumber, *board);
 		playersVector->push_back(newPlayer);
 	}
 
-	GameState gameState = GameState(board, playersVector);
+	GameState gameState = GameState(*board, *playersVector);
 
 	bool keepPlaying = true;
 

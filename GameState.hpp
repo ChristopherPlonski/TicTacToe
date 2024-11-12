@@ -11,7 +11,7 @@ using namespace std;
 class GameState {
 
 public:
-	GameState(Board* board, vector<Player*>* playersVector);
+	GameState(Board &board, vector<Player*>& playersVector);
 	enum State {
 		Player1Win,
 		Player2Win,

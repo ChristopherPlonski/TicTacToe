@@ -9,7 +9,7 @@ using namespace std;
 class Console {
 
 public:
-	Console(Board *board);
+	Console(Board &board);
 	string display();
 
 private:
