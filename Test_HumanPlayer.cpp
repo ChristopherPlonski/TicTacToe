@@ -18,7 +18,7 @@ int main() {
 	assert(humanPlayer.get_number() == 2);
 
 	Move inputtedMove = humanPlayer.get_move();
-	cout << "Inputted move: " << inputtedMove.get_optional_mark_position().value() << endl;
+	cout << "Inputted move: " << inputtedMove << endl;
 
 	cout << "--HumanPlayer tests have passed!" << endl;
 	return 0;

@@ -6,7 +6,6 @@
 class Player {
 
 public:
-	// TODO: IMPLEMENT "IMOVER" FOR THE VIRTUAL GET_MOVE().
 	Player(char playerMarker, int playerNumber);
 	virtual Move get_move() = 0;
 	char get_marker();
