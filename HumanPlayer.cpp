@@ -7,10 +7,8 @@
 
 using namespace std;
 
-HumanPlayer::HumanPlayer(char playerMarker, int playerNumber, Board &board)
+HumanPlayer::HumanPlayer(char playerMarker, int playerNumber, Board &board) : Player(playerMarker, playerNumber)
 {
-	this->playerMarker = playerMarker;
-	this->playerNumber = playerNumber;
 	this->board = &board;
 }
 
@@ -19,7 +17,7 @@ Move HumanPlayer::get_move() {
 	int userValidMove;
 
 	while (!gotValidIntMove) {
-		cout << "Player #" << playerNumber << " (" << playerMarker << "), where do you want to make your mark? ";
+		cout << "Player #" << Player::get_number() << " (" << Player::get_marker() << "), where do you want to make your mark? ";
 
 		string userStringInput;
 		getline(cin, userStringInput);
@@ -65,14 +63,5 @@ char HumanPlayer::prompt_new_marker(int playerNumber)
 
 char HumanPlayer::prompt_new_marker()
 {
-	return HumanPlayer::prompt_new_marker(this->playerNumber);
-}
-
-char HumanPlayer::get_marker()
-{
-	return this->playerMarker;
-}
-
-int HumanPlayer::get_number() {
-	return this->playerNumber;
+	return HumanPlayer::prompt_new_marker(this->Player::get_number());
 }
