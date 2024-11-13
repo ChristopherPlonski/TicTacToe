@@ -22,7 +22,7 @@ void Game::start_game_loop()
 		int playerNumber = i + 1;
 		char playerMarker = settings.get_valid_marker_for_human_player(playerNumber, playersVector);
 
-		HumanPlayer* newPlayer = new HumanPlayer(playerMarker, playerNumber, *board);
+		HumanPlayer* newPlayer = new HumanPlayer(playerMarker, playerNumber);
 		playersVector->push_back(newPlayer);
 	}
 

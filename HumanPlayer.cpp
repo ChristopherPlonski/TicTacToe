@@ -7,9 +7,9 @@
 
 using namespace std;
 
-HumanPlayer::HumanPlayer(char playerMarker, int playerNumber, Board &board) : Player(playerMarker, playerNumber)
+HumanPlayer::HumanPlayer(char playerMarker, int playerNumber) : Player(playerMarker, playerNumber)
 {
-	this->board = &board;
+
 }
 
 Move HumanPlayer::get_move() {
