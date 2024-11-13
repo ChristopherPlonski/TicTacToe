@@ -8,7 +8,7 @@ char Settings::get_valid_marker_from_human_player(HumanPlayer* humanPlayerToGetM
 	char validPlayerMarker;
 
 	while (!gotValidMarker) {
-		char markerFromPlayer = humanPlayerToGetMarkerFor->prompt_new_marker();
+		char markerFromPlayer = humanPlayerToGetMarkerFor->prompt_for_new_marker();
 		
 		bool isPlayerMarkerUnique = is_player_marker_unique(markerFromPlayer, humanPlayerToGetMarkerFor, allPlayersVector);
 
@@ -30,7 +30,7 @@ char Settings::get_valid_marker_for_human_player(int playerNumber, vector<Player
 	char validPlayerMarker;
 
 	while (!gotValidMarker) {
-		char markerFromPlayer = HumanPlayer::prompt_new_marker(playerNumber);
+		char markerFromPlayer = HumanPlayer::prompt_for_marker(playerNumber);
 
 		bool isPlayerMarkerUnique = is_player_marker_unique(markerFromPlayer, NULL, allPlayersVector);
 

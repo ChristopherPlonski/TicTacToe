@@ -36,7 +36,7 @@ Move HumanPlayer::get_move() {
 	return Move(userValidMove);
 }
 
-char HumanPlayer::prompt_new_marker(int playerNumber)
+char HumanPlayer::prompt_for_marker(int playerNumber)
 {
 	bool gotValidMarker = false;
 	char userValidMarker;
@@ -61,7 +61,7 @@ char HumanPlayer::prompt_new_marker(int playerNumber)
 	return userValidMarker;
 }
 
-char HumanPlayer::prompt_new_marker()
+char HumanPlayer::prompt_for_new_marker()
 {
-	return HumanPlayer::prompt_new_marker(this->Player::get_number());
+	return HumanPlayer::prompt_for_marker(this->Player::get_number());
 }
