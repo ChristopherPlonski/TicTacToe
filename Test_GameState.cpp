@@ -1,6 +1,9 @@
 #include <iostream>
 #include <cassert>
+#include <vector>
+
 #include "GameState.hpp"
+#include "HumanPlayer.hpp"
 
 using namespace std;
 
@@ -8,7 +11,11 @@ int main() {
 	cout << "--Testing GameState." << endl;
 
 	Board board = Board();
-	GameState game_state(&board);
+	vector<Player*> playerList = vector<Player*>();
+	playerList.push_back(new HumanPlayer('X', 1));
+	playerList.push_back(new HumanPlayer('O', 2));
+
+	GameState game_state(board, playerList);
 
 	// Testing a line of X
 	assert(game_state.get_current_state() == GameState::State::InProgress);
