@@ -1,8 +1,8 @@
-#include "Settings.hpp"
+#include "MarkerValidator.hpp"
 
 #include <iostream>
 
-char Settings::get_valid_marker_from_human_player(HumanPlayer* humanPlayerToGetMarkerFor, vector<Player*>* allPlayersVector)
+char MarkerValidator::get_valid_marker_from_human_player(HumanPlayer* humanPlayerToGetMarkerFor, vector<Player*>* allPlayersVector)
 {
 	bool gotValidMarker = false;
 	char validPlayerMarker;
@@ -24,7 +24,7 @@ char Settings::get_valid_marker_from_human_player(HumanPlayer* humanPlayerToGetM
 	return validPlayerMarker;
 }
 
-char Settings::get_valid_marker_for_human_player(int playerNumber, vector<Player*>* allPlayersVector)
+char MarkerValidator::get_valid_marker_for_human_player(int playerNumber, vector<Player*>* allPlayersVector)
 {
 	bool gotValidMarker = false;
 	char validPlayerMarker;
@@ -46,7 +46,7 @@ char Settings::get_valid_marker_for_human_player(int playerNumber, vector<Player
 	return validPlayerMarker;
 }
 
-bool Settings::is_player_marker_unique(char playerMarker, Player* playerOfMarkerToCheck, vector<Player*>* allPlayersVector)
+bool MarkerValidator::is_player_marker_unique(char playerMarker, Player* playerOfMarkerToCheck, vector<Player*>* allPlayersVector)
 {
 	for (int i = 0; i < allPlayersVector->size(); i++) {
 		Player* playerToCheck = allPlayersVector->at(i);

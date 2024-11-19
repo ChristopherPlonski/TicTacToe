@@ -2,7 +2,7 @@
 
 #include "Game.hpp"
 #include "HumanPlayer.hpp"
-#include "Settings.hpp"
+#include "MarkerValidator.hpp"
 #include "StringConverter.hpp"
 #include "MoveValidator.hpp"
 
@@ -12,7 +12,7 @@ void Game::start_game_loop()
 {
 	Board* board = new Board();
 	Console console = Console(*board);
-	Settings settings = Settings();
+	MarkerValidator markerValidator = MarkerValidator();
 
 	cout << "Welcome to Tic-Tac-Toe! \n";
 
@@ -20,7 +20,7 @@ void Game::start_game_loop()
 
 	for (int i = 0; i < NUM_PLAYERS; i++) {
 		int playerNumber = i + 1;
-		char playerMarker = settings.get_valid_marker_for_human_player(playerNumber, playersVector);
+		char playerMarker = markerValidator.get_valid_marker_for_human_player(playerNumber, playersVector);
 
 		HumanPlayer* newPlayer = new HumanPlayer(playerMarker, playerNumber);
 		playersVector->push_back(newPlayer);

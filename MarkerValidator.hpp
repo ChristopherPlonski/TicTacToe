@@ -1,5 +1,5 @@
-#ifndef SETTINGS_H
-#define SETTINGS_H
+#ifndef MARKERVALIDATOR_H
+#define MARKERVALIDATOR_H
 
 #include <vector>
 
@@ -7,7 +7,7 @@
 
 using namespace std;
 
-class Settings {
+class MarkerValidator {
 
 public:
 	char get_valid_marker_from_human_player(HumanPlayer* playerToGetMarkerFor, vector<Player*>* allPlayersVector);
@@ -17,4 +17,4 @@ private:
 
 };
 
-#endif // !SETTINGS_H
+#endif // !MARKERVALIDATOR_H
