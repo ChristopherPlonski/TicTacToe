@@ -4,13 +4,13 @@
 Move::Move(int markPosition)
 {
 	this->optionalMarkPosition = optional<int>(markPosition);
-	this->usedAbility = false;
+	this->usedTurnEndingAbility = false;
 }
 
 Move::Move()
 {
 	this->optionalMarkPosition = optional<int>();
-	this->usedAbility = true;
+	this->usedTurnEndingAbility = true;
 }
 
 optional<int> Move::get_optional_mark_position()
@@ -18,9 +18,9 @@ optional<int> Move::get_optional_mark_position()
 	return optionalMarkPosition;
 }
 
-bool Move::used_ability()
+bool Move::used_turn_ending_ability()
 {
-	return this->usedAbility;
+	return this->usedTurnEndingAbility;
 }
 
 ostream& operator<<(ostream& os, const Move& move)
