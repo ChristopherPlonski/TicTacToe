@@ -2,17 +2,17 @@
 #include <string>
 #include <optional>
 
-#include "HumanPlayer.hpp"
+#include "BasicPlayer.hpp"
 #include "StringConverter.hpp"
 
 using namespace std;
 
-HumanPlayer::HumanPlayer(char playerMarker, int playerNumber) : Player(playerMarker, playerNumber)
+BasicPlayer::BasicPlayer(char playerMarker, int playerNumber) : Player(playerMarker, playerNumber)
 {
 
 }
 
-Move HumanPlayer::get_move() {
+Move BasicPlayer::get_move() {
 	bool gotValidIntMove = false;
 	int userValidMove;
 

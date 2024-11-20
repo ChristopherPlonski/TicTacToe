@@ -3,10 +3,10 @@
 
 #include "Player.hpp"
 
-class HumanPlayer : public Player {
+class BasicPlayer : public Player {
 
 public:
-	explicit HumanPlayer(char playerMarker, int playerNumber);
+	explicit BasicPlayer(char playerMarker, int playerNumber);
 	Move get_move() override;
 
 private:

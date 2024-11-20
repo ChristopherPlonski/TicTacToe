@@ -12,8 +12,8 @@ int main() {
 
 	Board board = Board();
 	vector<Player*> playerList = vector<Player*>();
-	playerList.push_back(new HumanPlayer('X', 1));
-	playerList.push_back(new HumanPlayer('O', 2));
+	playerList.push_back(new BasicPlayer('X', 1));
+	playerList.push_back(new BasicPlayer('O', 2));
 
 	GameState game_state(board, playerList);
 
