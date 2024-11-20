@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cassert>
 
-#include "HumanPlayer.hpp"
+#include "BasicPlayer.hpp"
 #include "Board.hpp"
 
 using namespace std;
