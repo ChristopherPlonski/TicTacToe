@@ -12,8 +12,8 @@ public:
 	int get_number();
 
 protected:	
-	void set_player_marker(char playerMarker);
-	void set_player_number(int playerNumber);
+	//void set_player_marker(char playerMarker);
+	//void set_player_number(int playerNumber);
 
 private:
 	char playerMarker;
