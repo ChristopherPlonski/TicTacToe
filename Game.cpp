@@ -33,19 +33,19 @@ void Game::start_game_loop()
 	bool keepPlaying = true;
 
 	while (keepPlaying) {
-		Gamemode::GamemodeType chosenGamemode = gamemodeHandler.get_user_to_pick_gamemode_type();
+		GamemodeInfo::GamemodeType chosenGamemode = gamemodeHandler.get_user_to_pick_gamemode_type();
 
-		if (chosenGamemode == Gamemode::GamemodeType::REGULAR) {
+		if (chosenGamemode == GamemodeInfo::GamemodeType::REGULAR) {
 			// Nothing special for regular gamemode
 		}
-		else if (chosenGamemode == Gamemode::GamemodeType::BATTLE) {
+		else if (chosenGamemode == GamemodeInfo::GamemodeType::BATTLE) {
 			// Have players choose their archetypes.
 			// TODO: This.
 			cout << "Choose your archetypes! \n";
 		}
 		else {
 			// No implementation for this gamemode yet, not good.
-			cerr << "ERROR: No implementation for Gamemode with GamemodeType: " << ((int)chosenGamemode);
+			cerr << "ERROR: No implementation for GamemodeInfo with GamemodeType: " << ((int)chosenGamemode);
 		}
 
 		start_game(*board, console, gameState, *playersVector);

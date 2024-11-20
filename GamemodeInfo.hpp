@@ -5,7 +5,7 @@
 
 using namespace std;
 
-struct Gamemode {
+struct GamemodeInfo {
 
 public:
 	enum class GamemodeType {
@@ -13,7 +13,7 @@ public:
 		BATTLE
 	};
 
-	Gamemode(GamemodeType gamemodeType, string gamemodeTitle, string gamemodeDescription);
+	GamemodeInfo(GamemodeType gamemodeType, string gamemodeTitle, string gamemodeDescription);
 	const GamemodeType GAMEMODE_TYPE;
 	const string GAMEMODE_TITLE;
 	const string GAMEMODE_DESCRIPTION;

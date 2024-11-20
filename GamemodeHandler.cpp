@@ -6,23 +6,23 @@
 using namespace std;
 
 GamemodeHandler::GamemodeHandler() : GAMEMODES_ARRAY{
-	Gamemode(Gamemode::GamemodeType::REGULAR, "Regular", "The classic game of Tic-Tac-Toe!"),
-	Gamemode(Gamemode::GamemodeType::BATTLE, "Battle", "Use special archetypes to completely change the way you play!")
+	GamemodeInfo(GamemodeInfo::GamemodeType::REGULAR, "Regular", "The classic game of Tic-Tac-Toe!"),
+	GamemodeInfo(GamemodeInfo::GamemodeType::BATTLE, "Battle", "Use special archetypes to completely change the way you play!")
 }
 {
 
 }
 
-Gamemode::GamemodeType GamemodeHandler::get_user_to_pick_gamemode_type()
+GamemodeInfo::GamemodeType GamemodeHandler::get_user_to_pick_gamemode_type()
 {
 	bool gotValidGamemode = false;
-	const Gamemode* chosenGamemode = &GAMEMODES_ARRAY[0]; // Default.
+	const GamemodeInfo* chosenGamemode = &GAMEMODES_ARRAY[0]; // Default.
 
 	while (!gotValidGamemode) {
 		cout << "Choose one of the gamemodes (type their respective number to choose it).\n";
 
 		for (int i = 0; i < NUMBER_OF_GAMEMODES; i++) {
-			Gamemode gamemode = GAMEMODES_ARRAY[i];
+			GamemodeInfo gamemode = GAMEMODES_ARRAY[i];
 			const int NUMBER_REPRESENTING_GAMEMODE = i + 1;
 
 			cout << "[" << NUMBER_REPRESENTING_GAMEMODE << "] - " << gamemode.GAMEMODE_TITLE << " | " << gamemode.GAMEMODE_DESCRIPTION << endl;
@@ -49,7 +49,7 @@ Gamemode::GamemodeType GamemodeHandler::get_user_to_pick_gamemode_type()
 
 	cout << "You chose gamemode: " << chosenGamemode->GAMEMODE_TITLE << endl;
 
-	Gamemode::GamemodeType chosenGamemodeType = chosenGamemode->GAMEMODE_TYPE;
+	GamemodeInfo::GamemodeType chosenGamemodeType = chosenGamemode->GAMEMODE_TYPE;
 
 	return chosenGamemodeType;
 }

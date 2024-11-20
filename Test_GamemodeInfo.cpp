@@ -1,19 +1,19 @@
 #include <cassert>
 #include <iostream>
 
-#include "Gamemode.hpp"
+#include "GamemodeInfo.hpp"
 
 using namespace std;
 
 int main() {
-	cout << "--Testing Gamemode." << endl;
+	cout << "--Testing GamemodeInfo." << endl;
 
-	Gamemode gamemode = Gamemode(Gamemode::GamemodeType::REGULAR, " TEsT! ", "t E S T 100");
+	GamemodeInfo gamemode = GamemodeInfo(GamemodeInfo::GamemodeType::REGULAR, " TEsT! ", "t E S T 100");
 
-	assert(gamemode.GAMEMODE_TYPE == Gamemode::GamemodeType::REGULAR);
+	assert(gamemode.GAMEMODE_TYPE == GamemodeInfo::GamemodeType::REGULAR);
 	assert(gamemode.GAMEMODE_TITLE == " TEsT! ");
 	assert(gamemode.GAMEMODE_DESCRIPTION == "t E S T 100");
 
-	cout << "--Gamemode tests have passed!" << endl;
+	cout << "--GamemodeInfo tests have passed!" << endl;
 	return 0;
 }
