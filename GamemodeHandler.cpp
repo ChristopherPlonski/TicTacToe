@@ -13,9 +13,7 @@ GamemodeHandler::GamemodeHandler() : GAMEMODES_ARRAY{
 
 }
 
-// TODO: Preferably move this to another class, GamemodeHandler should not be having the responsibility of holding all the gamemodes and also
-// prompting the user for a gamemode. 
-Gamemode::GamemodeType GamemodeHandler::get_user_to_pick_gamemode()
+Gamemode::GamemodeType GamemodeHandler::get_user_to_pick_gamemode_type()
 {
 	bool gotValidGamemode = false;
 	const Gamemode* chosenGamemode = &GAMEMODES_ARRAY[0]; // Default.
@@ -27,7 +25,7 @@ Gamemode::GamemodeType GamemodeHandler::get_user_to_pick_gamemode()
 			Gamemode gamemode = GAMEMODES_ARRAY[i];
 			const int NUMBER_REPRESENTING_GAMEMODE = i + 1;
 
-			cout << "[" << NUMBER_REPRESENTING_GAMEMODE << "] " << gamemode.GAMEMODE_TITLE << " | " << gamemode.GAMEMODE_DESCRIPTION << endl;
+			cout << "[" << NUMBER_REPRESENTING_GAMEMODE << "] - " << gamemode.GAMEMODE_TITLE << " | " << gamemode.GAMEMODE_DESCRIPTION << endl;
 		}
 
 		string userResponse;

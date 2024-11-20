@@ -33,7 +33,7 @@ void Game::start_game_loop()
 	bool keepPlaying = true;
 
 	while (keepPlaying) {
-		Gamemode::GamemodeType chosenGamemode = gamemodeHandler.get_user_to_pick_gamemode();
+		Gamemode::GamemodeType chosenGamemode = gamemodeHandler.get_user_to_pick_gamemode_type();
 
 		if (chosenGamemode == Gamemode::GamemodeType::REGULAR) {
 			// Nothing special for regular gamemode
