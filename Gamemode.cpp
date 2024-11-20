@@ -1,25 +1,24 @@
 #include "Gamemode.hpp"
 
-Gamemode::Gamemode(GamemodeType gamemodeType, string gamemodeTitle, string gamemodeDescription)
+Gamemode::Gamemode(GamemodeType gamemodeType, string gamemodeTitle, string gamemodeDescription) : 
+GAMEMODE_TYPE(gamemodeType), GAMEMODE_TITLE(gamemodeTitle), GAMEMODE_DESCRIPTION(gamemodeDescription)
 {
-	this->gamemodeType = gamemodeType;
-	this->gamemodeTitle = gamemodeTitle;
-	this->gamemodeDescription = gamemodeDescription;
+
 }
 
-Gamemode::GamemodeType Gamemode::get_gamemode_type()
-{
-	return this->gamemodeType;
-}
-
-string Gamemode::get_gamemode_title()
-{
-	return this->gamemodeTitle;
-}
-
-string Gamemode::get_gamemode_description()
-{
-	return this->gamemodeDescription;
-}
+//Gamemode::GamemodeType Gamemode::get_gamemode_type() const
+//{
+//	return this->GAMEMODE_TYPE;
+//}
+//
+//string Gamemode::get_gamemode_title() const
+//{
+//	return this->GAMEMODE_TITLE;
+//}
+//
+//string Gamemode::get_gamemode_description() const
+//{
+//	return this->GAMEMODE_DESCRIPTION;
+//}
 
 

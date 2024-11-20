@@ -5,6 +5,7 @@
 #include "MarkerValidator.hpp"
 #include "StringConverter.hpp"
 #include "MoveValidator.hpp"
+#include "GamemodeHandler.hpp"
 
 using namespace std;
 
@@ -13,6 +14,7 @@ void Game::start_game_loop()
 	Board* board = new Board();
 	Console console = Console(*board);
 	MarkerValidator markerValidator = MarkerValidator();
+	GamemodeHandler gamemodeHandler = GamemodeHandler();
 
 	cout << "Welcome to Tic-Tac-Toe! \n";
 
@@ -31,6 +33,21 @@ void Game::start_game_loop()
 	bool keepPlaying = true;
 
 	while (keepPlaying) {
+		Gamemode::GamemodeType chosenGamemode = gamemodeHandler.get_user_to_pick_gamemode();
+
+		if (chosenGamemode == Gamemode::GamemodeType::REGULAR) {
+			// Nothing special for regular gamemode
+		}
+		else if (chosenGamemode == Gamemode::GamemodeType::BATTLE) {
+			// Have players choose their archetypes.
+			// TODO: This.
+			cout << "Choose your archetypes! \n";
+		}
+		else {
+			// No implementation for this gamemode yet, not good.
+			cerr << "ERROR: No implementation for Gamemode with GamemodeType: " << ((int)chosenGamemode);
+		}
+
 		start_game(*board, console, gameState, *playersVector);
 
 		string userResponse;

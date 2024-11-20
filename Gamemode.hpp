@@ -14,14 +14,9 @@ public:
 	};
 
 	Gamemode(GamemodeType gamemodeType, string gamemodeTitle, string gamemodeDescription);
-	GamemodeType get_gamemode_type();
-	string get_gamemode_title();
-	string get_gamemode_description();
-
-private:
-	GamemodeType gamemodeType;
-	string gamemodeTitle;
-	string gamemodeDescription;
+	const GamemodeType GAMEMODE_TYPE;
+	const string GAMEMODE_TITLE;
+	const string GAMEMODE_DESCRIPTION;
 };
 
 #endif // !GAMEMODE_H
