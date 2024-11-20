@@ -1,5 +1,5 @@
-#ifndef GAMEMODE_H
-#define GAMEMODE_H
+#ifndef GAMEMODEINFO_H
+#define GAMEMODEINFO_H
 
 #include <string>
 
@@ -19,4 +19,4 @@ public:
 	const string GAMEMODE_DESCRIPTION;
 };
 
-#endif // !GAMEMODE_H
+#endif // !GAMEMODEINFO_H

@@ -3,7 +3,7 @@
 
 #include <array>
 
-#include "Gamemode.hpp"
+#include "GamemodeInfo.hpp"
 
 using namespace std;
 
