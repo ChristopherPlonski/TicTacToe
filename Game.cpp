@@ -5,7 +5,7 @@
 #include "MarkerValidator.hpp"
 #include "StringConverter.hpp"
 #include "MoveValidator.hpp"
-#include "GamemodeHandler.hpp"
+#include "GamemodeInfoHandler.hpp"
 
 using namespace std;
 
@@ -14,7 +14,7 @@ void Game::start_game_loop()
 	Board* board = new Board();
 	Console console = Console(*board);
 	MarkerValidator markerValidator = MarkerValidator();
-	GamemodeHandler gamemodeHandler = GamemodeHandler();
+	GamemodeInfoHandler gamemodeInfoHandler = GamemodeInfoHandler();
 
 	cout << "Welcome to Tic-Tac-Toe! \n";
 
@@ -33,7 +33,7 @@ void Game::start_game_loop()
 	bool keepPlaying = true;
 
 	while (keepPlaying) {
-		GamemodeInfo::GamemodeType chosenGamemode = gamemodeHandler.get_user_to_pick_gamemode_type();
+		GamemodeInfo::GamemodeType chosenGamemode = gamemodeInfoHandler.get_user_to_pick_gamemode_type();
 
 		if (chosenGamemode == GamemodeInfo::GamemodeType::REGULAR) {
 			// Nothing special for regular gamemode
