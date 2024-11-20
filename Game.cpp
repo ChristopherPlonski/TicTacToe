@@ -61,10 +61,16 @@ void Game::start_game(Board &board, Console &console, GameState &gameState, vect
 
 		if (userDidMarkMove) {
 			int userMoveNumber = userMove.get_optional_mark_position().value();
-			cout << "User move: " << userMoveNumber << endl;
+			cout << "Player move: " << userMoveNumber << endl;
 			board.mark_pos(userMoveNumber, currentPlayer->get_marker());
 		}
-
+		else if (userMove.used_turn_ending_ability()){
+			cout << "Player used abiltiy as turn." << endl;
+		}
+		else {
+			// There was some implementation that hasn't been made yet.
+			cerr << "ERROR: No implementation for unique userMove." << endl;
+		}
 
 		// Set currentPlayer to next player
 		if (currentPlayerIndex == playersVector.size() - 1) {
