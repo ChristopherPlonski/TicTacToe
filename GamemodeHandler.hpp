@@ -10,11 +10,12 @@ using namespace std;
 class GamemodeHandler {
 
 public:
+	static const int NUMBER_OF_GAMEMODES = 2;
+
 	GamemodeHandler();
 	Gamemode::GamemodeType get_user_to_pick_gamemode();
 
 private:
-	static const int NUMBER_OF_GAMEMODES = 2;
 	const array<Gamemode, NUMBER_OF_GAMEMODES> GAMEMODES_ARRAY;
 };
 
