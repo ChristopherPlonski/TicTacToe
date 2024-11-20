@@ -4,7 +4,7 @@ pair<bool, string> MoveValidator::is_move_valid(Move move, Board &board)
 {
 	bool playerDidMarkMove = move.get_optional_mark_position().has_value();
 
-	if (!move.used_ability() && !playerDidMarkMove) {
+	if (!move.used_turn_ending_ability() && !playerDidMarkMove) {
 		string resultMessage = "ERROR: User move didn't mark position or use ability!\n";
 		return pair<bool, string>(false, resultMessage);
 	}
