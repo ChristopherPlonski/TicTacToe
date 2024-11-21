@@ -19,7 +19,7 @@ GamemodeInfo::GamemodeType GamemodeInfoHandler::get_user_to_pick_gamemode_type()
 	const GamemodeInfo* chosenGamemodeInfo = &GAMEMODE_INFOS_ARRAY[0]; // Default.
 
 	while (!gotValidGamemode) {
-		cout << "Choose one of the gamemodes (type their respective number to choose it).\n";
+		cout << "Choose one of the gamemodes (input their respective number to choose it).\n";
 
 		for (int i = 0; i < NUMBER_OF_GAMEMODES; i++) {
 			GamemodeInfo gamemode = GAMEMODE_INFOS_ARRAY[i];
@@ -34,7 +34,7 @@ GamemodeInfo::GamemodeType GamemodeInfoHandler::get_user_to_pick_gamemode_type()
 		optional<int> optionalUserInt = StringConverter::try_get_int_from_string(userResponse);
 
 		if (!optionalUserInt.has_value()) {
-			cout << "Input was not a number. Please type one of the gamemodes' numbers.\n";
+			cout << "Input was not a number. Please input one of the gamemodes' numbers.\n";
 		}
 		else if (optionalUserInt.value() < 1 || optionalUserInt.value() > NUMBER_OF_GAMEMODES) {
 			cout << "Input was not one of the displayed gamemodes' numbers. Try again.\n";
