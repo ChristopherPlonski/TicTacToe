@@ -20,25 +20,32 @@ void Game::start_game_loop()
 
 	cout << "Welcome to Tic-Tac-Toe! \n";
 
-	vector<Player*>* playersVector = new vector<Player*>();
+	char playerMarkersArray[NUM_PLAYERS];
 
 	for (int i = 0; i < NUM_PLAYERS; i++) {
 		int playerNumber = i + 1;
-		char playerMarker = markerValidator.get_valid_marker_for_human_player(playerNumber, playersVector);
+		char playerMarker = markerValidator.get_valid_marker_for_human_player(playerNumber, playerMarkersArray, NUM_PLAYERS);
 
-		BasicPlayer* newPlayer = new BasicPlayer(playerMarker, playerNumber);
-		playersVector->push_back(newPlayer);
+		playerMarkersArray[i] = playerMarker;
 	}
-
-	GameState gameState = GameState(*board, *playersVector);
 
 	bool keepPlaying = true;
 
 	while (keepPlaying) {
 		GamemodeInfo::GamemodeType chosenGamemode = gamemodeInfoHandler.get_user_to_pick_gamemode_type();
 
+		vector<Player*>* playersVector = new vector<Player*>();
+		GameState gameState = GameState(*board, *playersVector);
+
 		if (chosenGamemode == GamemodeInfo::GamemodeType::REGULAR) {
-			// Nothing special for regular gamemode
+			// Create regular players
+
+			for (int i = 0; i < NUM_PLAYERS; i++) {
+				int playerNumber = i + 1;
+				Player* basicPlayer = new BasicPlayer(playerMarkersArray[i], playerNumber);
+
+				playersVector->push_back(basicPlayer);
+			}
 		}
 		else if (chosenGamemode == GamemodeInfo::GamemodeType::BATTLE) {
 			ArchetypeInfoHandler archetypeInfoHandler = ArchetypeInfoHandler();
@@ -54,17 +61,15 @@ void Game::start_game_loop()
 				PlayerArchetypeBuilder playerArchetypeBuilder = PlayerArchetypeBuilder(*board);
 
 				Player* playerObjectFromChosenArchetype = playerArchetypeBuilder.create_player_object_from_archetype_type(
-					userChosenArchetypeType, PLAYER_NUMBER, playersVector->at(i)->get_marker());
+					userChosenArchetypeType, playerMarkersArray[i], PLAYER_NUMBER);
 
-				// TODO: test if this works! Tested. Does not work. Figure out a fix.
-				delete[] playersVector->at(i);
-
-				playersVector->at(i) = playerObjectFromChosenArchetype;
+				playersVector->push_back(playerObjectFromChosenArchetype);
 			}
 		}
 		else {
 			// No implementation for this gamemode yet, not good.
 			cerr << "ERROR: No implementation for GamemodeInfo with GamemodeType: " << ((int)chosenGamemode);
+			throw runtime_error("No implementation for GamemodeInfo::GamemodeType.");
 		}
 
 		start_game(*board, console, gameState, *playersVector);
@@ -84,6 +89,7 @@ void Game::start_game_loop()
 }
 
 void Game::start_game(Board &board, Console &console, GameState &gameState, vector<Player*> &playersVector) {
+	cout << "Starting game. \n";
 	int currentPlayerIndex = 0;
 
 	while (gameState.get_current_state() == GameState::State::InProgress) {
