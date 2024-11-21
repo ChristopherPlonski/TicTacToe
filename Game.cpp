@@ -13,8 +13,8 @@ using namespace std;
 
 void Game::start_game_loop()
 {
-	Board* board = new Board();
-	Console console = Console(*board);
+	Board board = Board();
+	Console console = Console(board);
 	MarkerValidator markerValidator = MarkerValidator();
 	GamemodeInfoHandler gamemodeInfoHandler = GamemodeInfoHandler();
 
@@ -35,7 +35,7 @@ void Game::start_game_loop()
 		GamemodeInfo::GamemodeType chosenGamemode = gamemodeInfoHandler.get_user_to_pick_gamemode_type();
 
 		vector<Player*>* playersVector = new vector<Player*>();
-		GameState gameState = GameState(*board, *playersVector);
+		GameState gameState = GameState(board, *playersVector);
 
 		if (chosenGamemode == GamemodeInfo::GamemodeType::REGULAR) {
 			// Create regular players
@@ -55,10 +55,10 @@ void Game::start_game_loop()
 
 			for (int i = 0; i < NUM_PLAYERS; i++) {
 				const int PLAYER_NUMBER = i + 1;
-				cout << "Player #" << PLAYER_NUMBER << ": \n";
+				cout << "* Player #" << PLAYER_NUMBER << ": \n";
 				ArchetypeInfo::ArchetypeType userChosenArchetypeType = archetypeInfoHandler.get_user_to_pick_archetype_type();
 
-				PlayerArchetypeBuilder playerArchetypeBuilder = PlayerArchetypeBuilder(*board);
+				PlayerArchetypeBuilder playerArchetypeBuilder = PlayerArchetypeBuilder(board);
 
 				Player* playerObjectFromChosenArchetype = playerArchetypeBuilder.create_player_object_from_archetype_type(
 					userChosenArchetypeType, playerMarkersArray[i], PLAYER_NUMBER);
@@ -72,7 +72,7 @@ void Game::start_game_loop()
 			throw runtime_error("No implementation for GamemodeInfo::GamemodeType.");
 		}
 
-		start_game(*board, console, gameState, *playersVector);
+		start_game(board, console, gameState, *playersVector);
 
 		string userResponse;
 
@@ -83,13 +83,13 @@ void Game::start_game_loop()
 			keepPlaying = false;
 		}
 		else {
-			board->clear_board();
+			board.clear_board();
 		}
 	}
 }
 
 void Game::start_game(Board &board, Console &console, GameState &gameState, vector<Player*> &playersVector) {
-	cout << "Starting game. \n";
+	cout << "~~-~~ Starting Game ~~-~~\n\n";
 	int currentPlayerIndex = 0;
 
 	while (gameState.get_current_state() == GameState::State::InProgress) {
