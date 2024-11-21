@@ -6,6 +6,8 @@
 #include "StringConverter.hpp"
 #include "MoveValidator.hpp"
 #include "GamemodeInfoHandler.hpp"
+#include "ArchetypeInfoHandler.hpp"
+#include "PlayerArchetypeBuilder.hpp"
 
 using namespace std;
 
@@ -39,9 +41,26 @@ void Game::start_game_loop()
 			// Nothing special for regular gamemode
 		}
 		else if (chosenGamemode == GamemodeInfo::GamemodeType::BATTLE) {
+			ArchetypeInfoHandler archetypeInfoHandler = ArchetypeInfoHandler();
+
 			// Have players choose their archetypes.
-			// TODO: This.
 			cout << "Choose your archetypes! \n";
+
+			for (int i = 0; i < NUM_PLAYERS; i++) {
+				const int PLAYER_NUMBER = i + 1;
+				cout << "Player #" << PLAYER_NUMBER << ": \n";
+				ArchetypeInfo::ArchetypeType userChosenArchetypeType = archetypeInfoHandler.get_user_to_pick_archetype_type();
+
+				PlayerArchetypeBuilder playerArchetypeBuilder = PlayerArchetypeBuilder(*board);
+
+				Player* playerObjectFromChosenArchetype = playerArchetypeBuilder.create_player_object_from_archetype_type(
+					userChosenArchetypeType, PLAYER_NUMBER, playersVector->at(i)->get_marker());
+
+				// TODO: test if this works! Tested. Does not work. Figure out a fix.
+				delete[] playersVector->at(i);
+
+				playersVector->at(i) = playerObjectFromChosenArchetype;
+			}
 		}
 		else {
 			// No implementation for this gamemode yet, not good.
