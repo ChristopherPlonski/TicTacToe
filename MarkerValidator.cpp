@@ -6,7 +6,7 @@
 
 using namespace std;
 
-char MarkerValidator::get_valid_marker_for_human_player(int playerNumber, vector<Player*>* allPlayersVector)
+char MarkerValidator::get_valid_marker_for_human_player(int playerNumber, char allPlayerMarkersArray[], int numOfPlayers)
 {
 	bool gotValidMarker = false;
 	char validPlayerMarker;
@@ -14,7 +14,7 @@ char MarkerValidator::get_valid_marker_for_human_player(int playerNumber, vector
 	while (!gotValidMarker) {
 		char markerFromPlayer = prompt_player_for_marker(playerNumber);
 
-		bool isPlayerMarkerUnique = is_player_marker_unique(markerFromPlayer, NULL, allPlayersVector);
+		bool isPlayerMarkerUnique = is_player_marker_unique(markerFromPlayer, allPlayerMarkersArray, numOfPlayers);
 
 		if (!isPlayerMarkerUnique) {
 			cout << "Provided marker is taken by another player! \n";
@@ -54,17 +54,13 @@ char MarkerValidator::prompt_player_for_marker(int playerNumber)
 }
 
 
-bool MarkerValidator::is_player_marker_unique(char playerMarker, Player* playerOfMarkerToCheck, vector<Player*>* allPlayersVector)
+bool MarkerValidator::is_player_marker_unique(char playerMarker, char allPlayerMarkersArray[], int numOfPlayers)
 {
-	for (int i = 0; i < allPlayersVector->size(); i++) {
-		Player* playerToCheck = allPlayersVector->at(i);
+	for (int i = 0; i < numOfPlayers; i++) {
+		char otherPlayerMarker = allPlayerMarkersArray[i];
 
-		if (playerToCheck != playerOfMarkerToCheck) {
-			char otherPlayerMarker = playerToCheck->get_marker();
-			//cout << "Checking Player #" << i+1 << endl;
-			if (playerMarker == otherPlayerMarker) {
-				return false;
-			}
+		if (playerMarker == otherPlayerMarker) {
+			return false;
 		}
 	}
 
