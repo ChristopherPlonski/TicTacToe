@@ -9,10 +9,10 @@ class PlayerArchetypeBuilder {
 
 public:
 	PlayerArchetypeBuilder(Board &boardReference);
-	Player* create_player_object_from_archetype_type(ArchetypeInfo::ArchetypeType playerArchetypeType, int playerNumber, char playerMarker);
+	Player* create_player_object_from_archetype_type(ArchetypeInfo::ArchetypeType playerArchetypeType, char playerMarker, int playerNumber);
 
 private:
-	Board board;
+	Board* board;
 
 };
 
