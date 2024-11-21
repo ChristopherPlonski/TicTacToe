@@ -34,7 +34,7 @@ GamemodeInfo::GamemodeType GamemodeInfoHandler::get_user_to_pick_gamemode_type()
 		optional<int> optionalUserInt = StringConverter::try_get_int_from_string(userResponse);
 
 		if (!optionalUserInt.has_value()) {
-			cout << "Input was not a number. Please type one of the gamemode's numbers.\n";
+			cout << "Input was not a number. Please type one of the gamemodes' numbers.\n";
 		}
 		else if (optionalUserInt.value() < 1 || optionalUserInt.value() > NUMBER_OF_GAMEMODES) {
 			cout << "Input was not one of the displayed gamemodes' numbers. Try again.\n";
