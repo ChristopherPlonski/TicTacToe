@@ -2,23 +2,21 @@
 #define PLAYER_H
 
 #include <string>
+#include <optional>
 
 #include "Move.hpp"
+#include "InvalidInput.hpp"
 
 using namespace std;
 
 class Player {
-
+	
 public:
 	Player(char playerMarker, int playerNumber);
-	virtual Move get_move() = 0;
+	virtual pair<optional<Move>, optional<InvalidInput>> try_get_move_from_input(string input) = 0;
 	char get_marker();
 	int get_number();
-
-protected:	
-	string get_move_prompt_text();
-	//void set_player_marker(char playerMarker);
-	//void set_player_number(int playerNumber);
+	virtual string get_move_prompt_text();
 
 private:
 	char playerMarker;

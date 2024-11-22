@@ -1,10 +1,10 @@
 #ifndef ARCHETYPEPLAYER_H
 #define ARCHETYPEPLAYER_H
 
-#include "Player.hpp"
+#include "BasicPlayer.hpp"
 #include "ArchetypeInfo.hpp"
 
-class ArchetypePlayer : public Player {
+class ArchetypePlayer : public BasicPlayer {
 
 public:
 	explicit ArchetypePlayer(char playerMarker, int playerNumber, const ArchetypeInfo &archetypeInfo);

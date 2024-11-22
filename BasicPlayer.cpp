@@ -1,4 +1,3 @@
-#include <iostream>
 #include <string>
 #include <optional>
 
@@ -12,27 +11,25 @@ BasicPlayer::BasicPlayer(char playerMarker, int playerNumber) : Player(playerMar
 
 }
 
-Move BasicPlayer::get_move() {
-	bool gotValidIntMove = false;
-	int userValidMove;
+string BasicPlayer::get_move_prompt_text()
+{
+	string basePromptText = Player::get_move_prompt_text();
+	string boardMovePromptText = "- Input # to place marker on board\n";
 
-	while (!gotValidIntMove) {
-		cout << get_move_prompt_text();
-		cout << "- Input # to place marker on board\n";
+	string entirePromptText = basePromptText + boardMovePromptText;
+	return entirePromptText;
+}
 
-		string userStringInput;
-		getline(cin, userStringInput);
+pair<optional<Move>, optional<InvalidInput>> BasicPlayer::try_get_move_from_input(string input)
+{
+	optional<int> optionalUserMarkMoveInput = StringConverter::try_get_int_from_string(input);
 
-		optional<int> optionalUserIntInput = StringConverter::try_get_int_from_string(userStringInput);
-
-		if (!optionalUserIntInput.has_value()) {
-			cout << "Provided input was not a valid number. \n";
-		}
-		else {
-			gotValidIntMove = true;
-			userValidMove = optionalUserIntInput.value();
-		}
+	if (!optionalUserMarkMoveInput.has_value()) {
+		return pair<optional<Move>, optional<InvalidInput>>(nullopt, InvalidInput());
 	}
 
-	return Move(userValidMove);
+	int userMarkMoveInput = optionalUserMarkMoveInput.value();
+	Move userMarkMove = Move(userMarkMoveInput);
+
+	return pair<optional<Move>, optional<InvalidInput>>(userMarkMove, nullopt);
 }
