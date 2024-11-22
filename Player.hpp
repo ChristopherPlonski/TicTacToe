@@ -1,7 +1,11 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include <string>
+
 #include "Move.hpp"
+
+using namespace std;
 
 class Player {
 
@@ -12,6 +16,7 @@ public:
 	int get_number();
 
 protected:	
+	string get_move_prompt_text();
 	//void set_player_marker(char playerMarker);
 	//void set_player_number(int playerNumber);
 
