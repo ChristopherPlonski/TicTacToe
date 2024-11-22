@@ -17,7 +17,8 @@ Move BasicPlayer::get_move() {
 	int userValidMove;
 
 	while (!gotValidIntMove) {
-		cout << "Player #" << Player::get_number() << " (" << Player::get_marker() << "), where do you want to make your mark? ";
+		cout << get_move_prompt_text();
+		cout << "- Input # to place marker on board\n";
 
 		string userStringInput;
 		getline(cin, userStringInput);
