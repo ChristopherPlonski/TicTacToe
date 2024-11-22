@@ -2,6 +2,7 @@
 
 #include "PlayerArchetypeBuilder.hpp"
 #include "PyromancerArchetype.hpp"
+#include "SwarmArchetype.hpp"
 #include "BasicPlayer.hpp"
 
 PlayerArchetypeBuilder::PlayerArchetypeBuilder(Board& boardReference)
@@ -20,6 +21,7 @@ Player* PlayerArchetypeBuilder::create_player_object_from_archetype_info(const A
 		return new PyromancerArchetype(playerMarker, playerNumber, PLAYER_ARCHETYPE_INFO_REF, *board);
 		break;
 	case ArchetypeInfo::ArchetypeType::SWARM:
+		return new SwarmArchetype(playerMarker, playerNumber, PLAYER_ARCHETYPE_INFO_REF);
 		break;
 	default:
 		// No implementation for this archetype!
