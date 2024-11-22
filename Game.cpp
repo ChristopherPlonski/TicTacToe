@@ -55,12 +55,12 @@ void Game::start_game_loop()
 			for (int i = 0; i < NUM_PLAYERS; i++) {
 				const int PLAYER_NUMBER = i + 1;
 				cout << "* Player #" << PLAYER_NUMBER << ": \n";
-				ArchetypeInfo::ArchetypeType userChosenArchetypeType = archetypeInfoHandler.get_user_to_pick_archetype_type();
+				ArchetypeInfo userChosenArchetypeInfo = archetypeInfoHandler.get_user_to_pick_archetype();
 
 				PlayerArchetypeBuilder playerArchetypeBuilder = PlayerArchetypeBuilder(board);
 
-				Player* playerObjectFromChosenArchetype = playerArchetypeBuilder.create_player_object_from_archetype_type(
-					userChosenArchetypeType, playerMarkersArray[i], PLAYER_NUMBER);
+				Player* playerObjectFromChosenArchetype = playerArchetypeBuilder.create_player_object_from_archetype_info(
+					userChosenArchetypeInfo, playerMarkersArray[i], PLAYER_NUMBER);
 
 				playersVector->push_back(playerObjectFromChosenArchetype);
 			}
@@ -96,8 +96,10 @@ void Game::start_game(Board &board, Console &console, GameState &gameState, vect
 
 		cout << console.display();
 
+		//cout << "DEBUG: Getting move\n";
 		Move userMove = get_valid_player_move(*currentPlayer, board);
 
+		//cout << "Debug: Checking move\n";
 		bool userDidMarkMove = userMove.get_optional_mark_position().has_value();
 
 		if (userDidMarkMove) {
@@ -106,7 +108,7 @@ void Game::start_game(Board &board, Console &console, GameState &gameState, vect
 			board.mark_pos(userMoveNumber, currentPlayer->get_marker());
 		}
 		else if (userMove.used_turn_ending_ability()){
-			cout << "Player used abiltiy as turn." << endl;
+			cout << "Player used ability as turn." << endl;
 		}
 		else {
 			// There was some implementation that hasn't been made yet.
@@ -146,22 +148,57 @@ void Game::start_game(Board &board, Console &console, GameState &gameState, vect
 
 Move Game::get_valid_player_move(Player& currentPlayer, Board& board)
 {
-	Move userMove;
+	Move userValidMove;
 
 	bool gotValidMove = false;
 
 	while (!gotValidMove) {
-		userMove = currentPlayer.get_move();
+		//cout << "DEBUG: In loop\n";
+		Move playerMove = get_player_move(currentPlayer);
+		//cout << "DEBUG: Loop 1 move: " << playerMove << endl;
 
-		pair<bool, string> validatorResult = MoveValidator::is_move_valid(userMove, board);
+		// TODO: Refactor validator result to use InvalidInput instead of string.
+		pair<bool, string> validatorResult = MoveValidator::is_move_valid(playerMove, board);
 		bool moveWasValid = validatorResult.first;
 		string moveResultText = validatorResult.second;
 
 		if (moveWasValid) {
 			gotValidMove = true;
+			userValidMove = playerMove;
 		}
 		else {
-			cout << moveResultText;
+			cout << moveResultText << endl;
+		}
+	}
+
+	//cout << "DEBUG: End loop 1 move: " << userValidMove << endl;
+	return userValidMove;
+}
+
+Move Game::get_player_move(Player& player)
+{
+	Move userMove;
+
+	bool gotMove = false;
+
+	while (!gotMove) {
+		//cout << "DEBUG: In loop2 \n";
+		cout << player.get_move_prompt_text();
+
+		string userInput;
+		getline(cin, userInput);
+
+		pair<optional<Move>, optional<InvalidInput>> userOptionalMove = player.try_get_move_from_input(userInput);
+		//cout << "DEBUG: Loop 2 move: " << userOptionalMove.first.value() << endl;
+
+		if (userOptionalMove.second.has_value()) {
+			// An invalid input was made.
+			cout << userOptionalMove.second.value().message() << endl;
+		}
+		else {
+			// A move was made!
+			userMove = userOptionalMove.first.value();
+			gotMove = true;
 		}
 	}
 
