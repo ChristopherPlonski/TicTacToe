@@ -20,6 +20,7 @@ void Game::start_game_loop()
 	ArchetypeInfoHandler archetypeInfoHandler = ArchetypeInfoHandler();
 
 	cout << "Welcome to Tic-Tac-Toe! \n";
+	cout << endl; // Extra endl for prettiness.
 
 	char playerMarkersArray[NUM_PLAYERS];
 
@@ -29,6 +30,8 @@ void Game::start_game_loop()
 
 		playerMarkersArray[i] = playerMarker;
 	}
+
+	cout << endl; // Extra endl for prettiness.
 
 	bool keepPlaying = true;
 
@@ -71,6 +74,8 @@ void Game::start_game_loop()
 			throw runtime_error("No implementation for GamemodeInfo::GamemodeType.");
 		}
 
+		cout << endl; // Extra endl for prettiness.
+
 		start_game(board, console, gameState, *playersVector);
 
 		string userResponse;
@@ -84,6 +89,15 @@ void Game::start_game_loop()
 		else {
 			board.clear_board();
 		}
+
+		// Delete players!
+		for (int i = 0; i < NUM_PLAYERS; i++) {
+			Player* player = playersVector->at(i);
+
+			delete player;
+		}
+
+		delete playersVector;
 	}
 }
 
@@ -95,6 +109,7 @@ void Game::start_game(Board &board, Console &console, GameState &gameState, vect
 		Player* currentPlayer = playersVector.at(currentPlayerIndex);
 
 		cout << console.display();
+		cout << endl; // Extra endl for prettiness.
 
 		//cout << "DEBUG: Getting move\n";
 		Move userMove = get_valid_player_move(*currentPlayer, board);
@@ -173,10 +188,10 @@ Move Game::get_valid_player_move(Player& currentPlayer, Board& board)
 			// Do nothing
 			break;
 		case MoveValidator::MoveValidationType::OUT_OF_BOARD_BOUNDS:
-			cout << "Provided move (" << to_string(playerMove.get_optional_mark_position().value()) << ") is out of board bounds.\n";
+			cout << "Provided move (" << to_string(playerMove.get_optional_mark_position().value()) << ") is out of board bounds. Try again.\n";
 			break;
 		case MoveValidator::MoveValidationType::MARK_MOVE_SPACE_OCCUPIED:
-			cout << "Tile at number: " + to_string(playerMove.get_optional_mark_position().value()) + " is already occupied. \n";
+			cout << "Tile at number: " << to_string(playerMove.get_optional_mark_position().value()) << " is already occupied. Try again.\n";
 			break;
 		case MoveValidator::MoveValidationType::MOVE_ERROR:
 			// An error should have be thrown, so this might not even run?
