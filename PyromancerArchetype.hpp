@@ -22,7 +22,7 @@ public:
 	/// Makes the prompt text for the player's move.
 	/// </summary>
 	/// <returns> A string containing the complete prompt text. </returns>
-	string get_move_prompt_text() override;
+	virtual string get_move_prompt_text() override;
 
 	/// <summary>
 	/// Attempts to interpret the player's input and determine their intended move.
@@ -32,7 +32,7 @@ public:
 	/// </summary>
 	/// <param name="input">The player's input string.</param>
 	/// <returns> A pair containing an optional Move and an optional InvalidInput. </returns>
-	pair<optional<Move>, InvalidInput*> try_get_move_from_input(string input) override;
+	virtual pair<optional<Move>, InvalidInput*> try_get_move_from_input(string input) override;
 
 protected:
 	/// <summary>
@@ -40,18 +40,18 @@ protected:
 	/// </summary>
 	/// <param name="input">The player's input string.</param>
 	/// <returns> A pair indicating whether the ability was used and, if not, an optional InvalidInput. </returns>
-	pair<bool, InvalidInput*> try_use_ability_from_input(string input) override;
+	virtual pair<bool, InvalidInput*> try_use_ability_from_input(string input) override;
 
 	/// <summary>
 	/// The ability is single-use, so it cannot be used again if it has already been activated.
 	/// </summary>
 	/// <returns> True if the ability can be used, false otherwise. </returns>
-	bool can_use_ability() override;
+	virtual bool can_use_ability() override;
 
 	/// <summary>
 	/// Pyromancer's ability is to clear the board.
 	/// </summary>
-	void activate_ability() override;
+	virtual void activate_ability() override;
 
 private:
 	Board *board;
