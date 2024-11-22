@@ -17,6 +17,7 @@ void Game::start_game_loop()
 	Console console = Console(board);
 	MarkerValidator markerValidator = MarkerValidator();
 	GamemodeInfoHandler gamemodeInfoHandler = GamemodeInfoHandler();
+	ArchetypeInfoHandler archetypeInfoHandler = ArchetypeInfoHandler();
 
 	cout << "Welcome to Tic-Tac-Toe! \n";
 
@@ -48,8 +49,6 @@ void Game::start_game_loop()
 			}
 		}
 		else if (chosenGamemode == GamemodeInfo::GamemodeType::BATTLE) {
-			ArchetypeInfoHandler archetypeInfoHandler = ArchetypeInfoHandler();
-
 			// Have players choose their archetypes.
 			cout << "Choose your archetypes! \n";
 
@@ -161,8 +160,9 @@ Move Game::get_valid_player_move(Player& currentPlayer, Board& board)
 		if (moveWasValid) {
 			gotValidMove = true;
 		}
-
-		cout << moveResultText;
+		else {
+			cout << moveResultText;
+		}
 	}
 
 	return userMove;
