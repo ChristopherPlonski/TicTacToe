@@ -9,6 +9,8 @@
 
 using namespace std;
 
+// Design note: I could turn this into an 'inteface' instead of the base class for players. Yes, all players should technically have a marker and number attribute, but
+// putting those methods in the interface contract will basically force that either way. This could decrease the coupling that I have currently with subclasses of this.
 class Player {
 	
 public:
