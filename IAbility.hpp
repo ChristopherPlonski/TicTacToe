@@ -11,7 +11,7 @@ using namespace std;
 class IAbility {
 
 protected:
-	virtual pair<bool, optional<InvalidInput>> try_use_ability_from_input(string input) = 0;
+	virtual pair<bool, InvalidInput*> try_use_ability_from_input(string input) = 0;
 	virtual bool can_use_ability() = 0;
 	virtual void activate_ability() = 0;
 };

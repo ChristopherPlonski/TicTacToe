@@ -20,16 +20,16 @@ string BasicPlayer::get_move_prompt_text()
 	return entirePromptText;
 }
 
-pair<optional<Move>, optional<InvalidInput>> BasicPlayer::try_get_move_from_input(string input)
+pair<optional<Move>, InvalidInput*> BasicPlayer::try_get_move_from_input(string input)
 {
 	optional<int> optionalUserMarkMoveInput = StringConverter::try_get_int_from_string(input);
 
 	if (!optionalUserMarkMoveInput.has_value()) {
-		return pair<optional<Move>, optional<InvalidInput>>(nullopt, InvalidInput());
+		return pair<optional<Move>, InvalidInput*>(nullopt, new InvalidInput());
 	}
 
 	int userMarkMoveInput = optionalUserMarkMoveInput.value();
 	Move userMarkMove = Move(userMarkMoveInput);
 
-	return pair<optional<Move>, optional<InvalidInput>>(userMarkMove, nullopt);
+	return pair<optional<Move>, InvalidInput*>(userMarkMove, nullptr);
 }

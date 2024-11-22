@@ -32,7 +32,7 @@ public:
 	/// </summary>
 	/// <param name="input">The player's input string.</param>
 	/// <returns> A pair containing an optional Move and an optional InvalidInput. </returns>
-	pair<optional<Move>, optional<InvalidInput>> try_get_move_from_input(string input) override;
+	pair<optional<Move>, InvalidInput*> try_get_move_from_input(string input) override;
 
 protected:
 	/// <summary>
@@ -40,7 +40,7 @@ protected:
 	/// </summary>
 	/// <param name="input">The player's input string.</param>
 	/// <returns> A pair indicating whether the ability was used and, if not, an optional InvalidInput. </returns>
-	pair<bool, optional<InvalidInput>> try_use_ability_from_input(string input) override;
+	pair<bool, InvalidInput*> try_use_ability_from_input(string input) override;
 
 	/// <summary>
 	/// The ability is single-use, so it cannot be used again if it has already been activated.

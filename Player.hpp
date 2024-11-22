@@ -13,7 +13,7 @@ class Player {
 	
 public:
 	Player(char playerMarker, int playerNumber);
-	virtual pair<optional<Move>, optional<InvalidInput>> try_get_move_from_input(string input) = 0;
+	virtual pair<optional<Move>, InvalidInput*> try_get_move_from_input(string input) = 0;
 	char get_marker();
 	int get_number();
 	virtual string get_move_prompt_text();

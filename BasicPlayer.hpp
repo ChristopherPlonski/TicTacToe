@@ -1,5 +1,5 @@
-#ifndef HUMANPLAYER_H
-#define HUMANPLAYER_H
+#ifndef BASICPLAYER_H
+#define BASICPLAYER_H
 
 #include "Player.hpp"
 
@@ -22,7 +22,7 @@ public:
 	/// </summary>
 	/// <param name="input">The player's input string.</param>
 	/// <returns> A pair containing an optional Move and an optional InvalidInput. </returns>
-	pair<optional<Move>, optional<InvalidInput>> try_get_move_from_input(string input) override;
+	pair<optional<Move>, InvalidInput*> try_get_move_from_input(string input) override;
 };
 
-#endif // !HUMANPLAYER_H
+#endif // !BASICPLAYER_H
