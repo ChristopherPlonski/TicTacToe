@@ -14,6 +14,7 @@ public:
 
 	ArchetypeInfoHandler();
 	ArchetypeInfo::ArchetypeType get_user_to_pick_archetype_type();
+	ArchetypeInfo get_archetype_info_from_archetype_type(ArchetypeInfo::ArchetypeType archetypeType);
 
 private:
 	const array<ArchetypeInfo, NUMBER_OF_ARCHETYPES> ARCHETYPE_INFOS_ARRAY;

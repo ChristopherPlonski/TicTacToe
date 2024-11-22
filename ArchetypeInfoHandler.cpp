@@ -54,3 +54,17 @@ ArchetypeInfo::ArchetypeType ArchetypeInfoHandler::get_user_to_pick_archetype_ty
 
 	return chosenArchetypeType;
 }
+
+ArchetypeInfo ArchetypeInfoHandler::get_archetype_info_from_archetype_type(ArchetypeInfo::ArchetypeType archetypeType)
+{
+	for (int i = 0; i < NUMBER_OF_ARCHETYPES; i++) {
+		ArchetypeInfo archetypeInfo = ARCHETYPE_INFOS_ARRAY[i];
+
+		if (archetypeInfo.ARCHETYPE_TYPE == archetypeType) {
+			return archetypeInfo;
+		}
+	}
+
+	cerr << "WARNING: No ArchetypeInfo found with ArchetypeType value: " << (int)archetypeType;
+	return ARCHETYPE_INFOS_ARRAY[0]; // Default.
+}
