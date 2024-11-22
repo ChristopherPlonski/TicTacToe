@@ -13,6 +13,8 @@ public:
 	/// <param name="archetypeInfo"> From ArchetypePlayer base class </param>
 	explicit SwarmArchetype(char playerMarker, int playerNumber, const ArchetypeInfo& archetypeInfo);
 
+	virtual const WinMarkCombination* get_win_mark_combinations_array() const override;
+
 	// No need to override this as the ability is passive, so the user doesn't need an extra prompt for it.
 	// string get_move_prompt_text() override;
 

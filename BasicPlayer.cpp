@@ -6,9 +6,19 @@
 
 using namespace std;
 
-BasicPlayer::BasicPlayer(char playerMarker, int playerNumber) : Player(playerMarker, playerNumber)
+BasicPlayer::BasicPlayer(char playerMarker, int playerNumber) : 
+	Player(playerMarker, playerNumber)
 {
 
+}
+
+const Player::WinMarkCombination* BasicPlayer::get_win_mark_combinations_array() const
+{
+	return new WinMarkCombination[3]{
+		WinMarkCombination::ROWS,
+		WinMarkCombination::COLUMNS,
+		WinMarkCombination::DIAGONALS
+	};
 }
 
 string BasicPlayer::get_move_prompt_text()

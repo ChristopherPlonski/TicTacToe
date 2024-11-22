@@ -14,6 +14,8 @@ public:
 	/// <returns> A string containing the complete prompt text. </returns>
 	string get_move_prompt_text() override;
 
+	virtual const WinMarkCombination* get_win_mark_combinations_array() const override;
+
 	/// <summary>
 	/// Attempts to interpret the player's input and determine their intended move.
 	/// 
@@ -22,7 +24,7 @@ public:
 	/// </summary>
 	/// <param name="input">The player's input string.</param>
 	/// <returns> A pair containing an optional Move and an optional InvalidInput. </returns>
-	pair<optional<Move>, InvalidInput*> try_get_move_from_input(string input) override;
+	virtual pair<optional<Move>, InvalidInput*> try_get_move_from_input(string input) override;
 };
 
 #endif // !BASICPLAYER_H
