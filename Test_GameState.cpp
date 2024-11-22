@@ -3,7 +3,7 @@
 #include <vector>
 
 #include "GameState.hpp"
-#include "HumanPlayer.hpp"
+#include "BasicPlayer.hpp"
 
 using namespace std;
 
