@@ -13,7 +13,7 @@ ArchetypeInfoHandler::ArchetypeInfoHandler() : ARCHETYPE_INFOS_ARRAY{
 
 }
 
-ArchetypeInfo::ArchetypeType ArchetypeInfoHandler::get_user_to_pick_archetype_type()
+ArchetypeInfo ArchetypeInfoHandler::get_user_to_pick_archetype()
 {
 	bool gotValidArchetype = false;
 	const ArchetypeInfo* chosenArchetypeInfo = &ARCHETYPE_INFOS_ARRAY[0]; // Default.
@@ -50,9 +50,7 @@ ArchetypeInfo::ArchetypeType ArchetypeInfoHandler::get_user_to_pick_archetype_ty
 
 	cout << "You chose archetype: " << chosenArchetypeInfo->ARCHETYPE_NAME << endl << endl;
 
-	ArchetypeInfo::ArchetypeType chosenArchetypeType = chosenArchetypeInfo->ARCHETYPE_TYPE;
-
-	return chosenArchetypeType;
+	return *chosenArchetypeInfo;
 }
 
 ArchetypeInfo ArchetypeInfoHandler::get_archetype_info_from_archetype_type(ArchetypeInfo::ArchetypeType archetypeType)

@@ -13,7 +13,7 @@ public:
 	static const int NUMBER_OF_ARCHETYPES = 2;
 
 	ArchetypeInfoHandler();
-	ArchetypeInfo::ArchetypeType get_user_to_pick_archetype_type();
+	ArchetypeInfo get_user_to_pick_archetype();
 	ArchetypeInfo get_archetype_info_from_archetype_type(ArchetypeInfo::ArchetypeType archetypeType);
 
 private:
