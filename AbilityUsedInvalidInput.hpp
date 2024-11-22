@@ -6,7 +6,7 @@
 class AbilityUsedInvalidInput : public InvalidInput {
 
 public:
-	 std::string message() override {
+	const std::string message() const override {
 		return "Ability already used.";
 	}
 

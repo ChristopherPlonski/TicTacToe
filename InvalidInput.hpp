@@ -6,7 +6,7 @@
 class InvalidInput {
 
 public:
-	virtual std::string message() {
+	const virtual std::string message() const {
 		return "Invalid input.";
 	}
 
