@@ -158,20 +158,35 @@ Move Game::get_valid_player_move(Player& currentPlayer, Board& board)
 		//cout << "DEBUG: Loop 1 move: " << playerMove << endl;
 
 		// TODO: Refactor validator result to use InvalidInput instead of string.
-		pair<bool, string> validatorResult = MoveValidator::is_move_valid(playerMove, board);
-		bool moveWasValid = validatorResult.first;
-		string moveResultText = validatorResult.second;
+		MoveValidator::MoveValidationType moveValidatorResult = MoveValidator::is_move_valid(playerMove, board);
+
+		bool moveWasValid = moveValidatorResult == MoveValidator::MoveValidationType::VALID_MOVE;
 
 		if (moveWasValid) {
 			gotValidMove = true;
 			userValidMove = playerMove;
 		}
-		else {
-			cout << moveResultText << endl;
+
+		switch (moveValidatorResult)
+		{
+		case MoveValidator::MoveValidationType::VALID_MOVE:
+			// Do nothing
+			break;
+		case MoveValidator::MoveValidationType::OUT_OF_BOARD_BOUNDS:
+			cout << "Provided move (" << to_string(playerMove.get_optional_mark_position().value()) << ") is out of board bounds.\n";
+			break;
+		case MoveValidator::MoveValidationType::MARK_MOVE_SPACE_OCCUPIED:
+			cout << "Tile at number: " + to_string(playerMove.get_optional_mark_position().value()) + " is already occupied. \n";
+			break;
+		case MoveValidator::MoveValidationType::MOVE_ERROR:
+			// An error should have be thrown, so this might not even run?
+			cerr << "ERROR: User move didn't mark position or use ability!\n";
+			break;
+		default:
+			break;
 		}
 	}
 
-	//cout << "DEBUG: End loop 1 move: " << userValidMove << endl;
 	return userValidMove;
 }
 
@@ -188,18 +203,21 @@ Move Game::get_player_move(Player& player)
 		string userInput;
 		getline(cin, userInput);
 
-		pair<optional<Move>, optional<InvalidInput>> userOptionalMove = player.try_get_move_from_input(userInput);
+		pair<optional<Move>, InvalidInput*> userOptionalMove = player.try_get_move_from_input(userInput);
 		//cout << "DEBUG: Loop 2 move: " << userOptionalMove.first.value() << endl;
 
-		if (userOptionalMove.second.has_value()) {
+		if (userOptionalMove.second != nullptr) {
 			// An invalid input was made.
-			cout << userOptionalMove.second.value().message() << endl;
+			cout << userOptionalMove.second->message() << " Try again." << endl;
 		}
 		else {
 			// A move was made!
 			userMove = userOptionalMove.first.value();
 			gotMove = true;
 		}
+
+		// Make sure to delete the InvalidInput* after use!
+		delete userOptionalMove.second;
 	}
 
 	return userMove;
