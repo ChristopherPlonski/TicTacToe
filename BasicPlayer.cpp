@@ -12,9 +12,9 @@ BasicPlayer::BasicPlayer(char playerMarker, int playerNumber) :
 
 }
 
-const Player::WinMarkCombination* BasicPlayer::get_win_mark_combinations_array() const
+const vector<Player::WinMarkCombination> BasicPlayer::get_win_mark_combinations_vector() const
 {
-	return new WinMarkCombination[3]{
+	return vector<WinMarkCombination> {
 		WinMarkCombination::ROWS,
 		WinMarkCombination::COLUMNS,
 		WinMarkCombination::DIAGONALS

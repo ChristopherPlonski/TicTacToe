@@ -3,6 +3,7 @@
 
 #include <string>
 #include <optional>
+#include <vector>
 
 #include "Move.hpp"
 #include "InvalidInput.hpp"
@@ -24,7 +25,7 @@ public:
 	virtual pair<optional<Move>, InvalidInput*> try_get_move_from_input(string input) = 0;
 	char get_marker();
 	int get_number();
-	virtual const WinMarkCombination* get_win_mark_combinations_array() const = 0;
+	virtual const vector<WinMarkCombination> get_win_mark_combinations_vector() const = 0;
 	virtual string get_move_prompt_text();	
 
 private:

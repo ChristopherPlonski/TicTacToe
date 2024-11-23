@@ -5,12 +5,13 @@ SwarmArchetype::SwarmArchetype(char playerMarker, int playerNumber, const Archet
 
 }
 
-const Player::WinMarkCombination* SwarmArchetype::get_win_mark_combinations_array() const
+const vector<Player::WinMarkCombination> SwarmArchetype::get_win_mark_combinations_vector() const
 {
-	return new WinMarkCombination[4]{
+	return vector<WinMarkCombination> {
 		WinMarkCombination::ROWS,
 		WinMarkCombination::COLUMNS,
 		WinMarkCombination::DIAGONALS,
 		WinMarkCombination::CORNERS
+
 	};
 }

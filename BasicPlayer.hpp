@@ -14,7 +14,7 @@ public:
 	/// <returns> A string containing the complete prompt text. </returns>
 	string get_move_prompt_text() override;
 
-	virtual const WinMarkCombination* get_win_mark_combinations_array() const override;
+	virtual const vector<WinMarkCombination> get_win_mark_combinations_vector() const override;
 
 	/// <summary>
 	/// Attempts to interpret the player's input and determine their intended move.
