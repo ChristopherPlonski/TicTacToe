@@ -1,6 +1,6 @@
 #include "GameState.hpp"
+
 #include <iostream>
-#include <string>
 
 using namespace std;
 
@@ -35,7 +35,7 @@ GameState::State GameState::get_current_state()
 	return dominantState;
 }
 
-GameState::State GameState::get_state_from_mark_array(char markArray[], int markArraySize, int markCountToCountAsWin)
+GameState::State GameState::get_state_from_mark_array(char markArray[], int markArraySize, Player::WinMarkCombination markArrayWinCombination)
 {
 	int numberOfP1Marks = 0;
 	int numberOfP2Marks = 0;
@@ -46,18 +46,21 @@ GameState::State GameState::get_state_from_mark_array(char markArray[], int mark
 		if (markToCheck == NULL) {
 			return State::InProgress;
 		}
-		else {
-			// Will eventually have to refactor once add the ability to have >2 players.
-			if (markToCheck == playersVector->at(0)->get_marker()) {
+
+		// Will eventually have to refactor once add the ability to have >2 players.
+		if (markToCheck == playersVector->at(0)->get_marker()) {
+			if (player_has_mark_win_combination(playersVector->at(0)->get_win_mark_combinations_vector(), markArrayWinCombination)) {
 				numberOfP1Marks++;
 			}
-			else if (markToCheck == playersVector->at(1)->get_marker()) {
+		}
+		else if (markToCheck == playersVector->at(1)->get_marker()) {
+			if (player_has_mark_win_combination(playersVector->at(1)->get_win_mark_combinations_vector(), markArrayWinCombination)) {
 				numberOfP2Marks++;
 			}
-			else {
-				cerr << "ERROR: Invalid markToCheck: " << markToCheck << endl;
-				throw runtime_error("Invalid markToCheck.");
-			}
+		}
+		else {
+			cerr << "ERROR: Invalid markToCheck: " << markToCheck << endl;
+			throw runtime_error("Invalid markToCheck.");
 		}
 	}
 
@@ -65,10 +68,10 @@ GameState::State GameState::get_state_from_mark_array(char markArray[], int mark
 	//cout << "P2Marks: " << numberOfP2Marks << endl;
 	// Could remove if-else statements since already returning, but will keep for readability sake.
 	// Also, currently there will ever only be 2 players, but since Game has a vector of players, that could change, so make sure this changes too once add ability for >2 players in the future.
-	if (numberOfP2Marks == markCountToCountAsWin) {
+	if (numberOfP2Marks == markArraySize) {
 		return State::Player2Win;
 	}
-	else if (numberOfP1Marks == markCountToCountAsWin) {
+	else if (numberOfP1Marks == markArraySize) {
 		return State::Player1Win;
 	}
 	else {
@@ -108,7 +111,7 @@ GameState::State GameState::get_state_from_row(int row)
 		markRowArray[i] = markAtPos;
 	}
 	
-	return get_state_from_mark_array(markRowArray, board->BOARD_SIZE, board->BOARD_SIZE);
+	return get_state_from_mark_array(markRowArray, board->BOARD_SIZE, Player::WinMarkCombination::ROWS);
 }
 
 GameState::State GameState::get_state_from_column(int column)
@@ -121,7 +124,7 @@ GameState::State GameState::get_state_from_column(int column)
 		markColumnArray[i] = markAtPos;
 	}
 
-	return get_state_from_mark_array(markColumnArray, board->BOARD_SIZE, board->BOARD_SIZE);
+	return get_state_from_mark_array(markColumnArray, board->BOARD_SIZE, Player::WinMarkCombination::COLUMNS);
 }
 
 GameState::State GameState::get_state_from_all_rows()
@@ -173,13 +176,34 @@ GameState::State GameState::get_state_from_diagonals()
 
 	const int NUM_OF_DIAGONALS = 2;
 	State diagonalsStatesArray[NUM_OF_DIAGONALS];
-	diagonalsStatesArray[0] = get_state_from_mark_array(markRightSlashDiagonalArray, board->BOARD_SIZE, board->BOARD_SIZE);
-	diagonalsStatesArray[1] = get_state_from_mark_array(markLeftSlashDiagonalArray, board->BOARD_SIZE, board->BOARD_SIZE);
+	diagonalsStatesArray[0] = get_state_from_mark_array(markRightSlashDiagonalArray, board->BOARD_SIZE, Player::WinMarkCombination::DIAGONALS);
+	diagonalsStatesArray[1] = get_state_from_mark_array(markLeftSlashDiagonalArray, board->BOARD_SIZE, Player::WinMarkCombination::DIAGONALS);
 
 	return get_state_from_state_array(diagonalsStatesArray, NUM_OF_DIAGONALS);
 }
 
 GameState::State GameState::get_state_from_corners()
 {
-	return State::Draw;
+	const int NUM_CORNERS = 4;
+	char markCornerArray[NUM_CORNERS];
+
+	markCornerArray[0] = board->get_mark_at_pos(0, 0);
+	markCornerArray[1] = board->get_mark_at_pos(0, board->BOARD_SIZE - 1);
+	markCornerArray[2] = board->get_mark_at_pos(board->BOARD_SIZE - 1, 0);
+	markCornerArray[3] = board->get_mark_at_pos(board->BOARD_SIZE - 1, board->BOARD_SIZE - 1);
+
+	return get_state_from_mark_array(markCornerArray, NUM_CORNERS, Player::WinMarkCombination::CORNERS);
+}
+
+bool GameState::player_has_mark_win_combination(vector<Player::WinMarkCombination> playerWinMarkCombinationVector, Player::WinMarkCombination winMarkCombinationToFind)
+{
+	for (int i = 0; i < playerWinMarkCombinationVector.size(); i++) {
+		Player::WinMarkCombination winMarkCombination = playerWinMarkCombinationVector[i];
+
+		if (winMarkCombination == winMarkCombinationToFind) {
+			return true;
+		}
+	}
+
+	return false;
 }

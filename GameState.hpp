@@ -1,8 +1,6 @@
 #ifndef GAMESTATE_H
 #define GAMESTATE_H
 
-#include <vector>
-
 #include "Board.hpp"
 #include "Player.hpp"
 
@@ -21,7 +19,7 @@ public:
 	State get_current_state();
 
 private:
-	State get_state_from_mark_array(char markArray[], int markArraySize, int markCountToCountAsWin);
+	State get_state_from_mark_array(char markArray[], int markArraySize, Player::WinMarkCombination markArrayWinCombination);
 
 	/// <summary>
 	/// Analyzes the states in the givenStateArray and returns the dominant state.
@@ -36,6 +34,7 @@ private:
 	State get_state_from_all_columns();
 	State get_state_from_diagonals();
 	State get_state_from_corners();
+	bool player_has_mark_win_combination(vector<Player::WinMarkCombination> playerWinMarkCombinationVector, Player::WinMarkCombination winMarkCombinationToFind);
 	State currentState;
 	Board* board;
 	vector<Player*>* playersVector;
