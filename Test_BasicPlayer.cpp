@@ -19,8 +19,14 @@ int main() {
 	assert(humanPlayer.get_marker() == 'B');
 	assert(humanPlayer.get_number() == 2);
 
-	Move inputtedMove = humanPlayer.get_move();
-	cout << "Inputted move: " << inputtedMove << endl;
+	assert(humanPlayer.try_get_move_from_input("1").first.value().get_optional_mark_position().value() == 1);
+	assert(humanPlayer.try_get_move_from_input("1").second == nullptr);
+
+	assert(humanPlayer.try_get_move_from_input("100").first.value().get_optional_mark_position().value() == 100);
+	assert(humanPlayer.try_get_move_from_input("100").second == nullptr);
+
+	assert(humanPlayer.try_get_move_from_input(" hello world! ").first.has_value() == false);
+	assert(humanPlayer.try_get_move_from_input(" hello world! ").second != nullptr);
 
 	cout << "--BasicPlayer tests have passed!" << endl;
 	return 0;
