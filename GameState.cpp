@@ -4,6 +4,10 @@
 
 using namespace std;
 
+// Design Note: Technically GameState shouldn't know about the Player class. It should just analyze the marks on the board and determine the winning
+// "character" based on a recieved 2D vector of "win combinations" of positions. Current implementation is fine and works, but isn't the
+// greatest in terms of coupling and single-responsiblity.
+
 GameState::GameState(Board &board, vector<Player*>& playersVector)
 {
 	this->currentState = State::InProgress;
