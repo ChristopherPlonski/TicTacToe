@@ -9,6 +9,8 @@
 #include "ArchetypeInfoHandler.hpp"
 #include "PlayerArchetypeBuilder.hpp"
 #include "SaveManager.hpp"
+#include "GameStats.hpp"
+#include "GameReportJSON.hpp"
 
 using namespace std;
 
@@ -104,9 +106,11 @@ void Game::start_game_loop()
 	}
 
 	// Once it gets to this point, that means the game was "closed."
+	GameReportJSON gameReportJSON = GameReportJSON();
+	string gameReport = gameReportJSON.generate_game_report(gameStats, true);
 
 	SaveManager saveManager = SaveManager();
-	saveManager.save_game_report_to_file();
+	saveManager.save_game_report_to_file(gameReport, "json");
 }
 
 GameState::State Game::start_game(Board &board, Console &console, GameState &gameState, vector<Player*> &playersVector) {
