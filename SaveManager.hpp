@@ -2,22 +2,17 @@
 #define SAVEMANAGER_H
 
 #include <string>
-#include "json.hpp"
-#include "GameStats.hpp"
 
 using namespace std;
-using json = nlohmann::json;
 
 class SaveManager {
 
 public:
-	void save_game_report_to_file(GameStats &gameStats);
+	void save_game_report_to_file(string gameReport, string fileType);
 
 private:
-	const string NUM_OF_GAMES_PLAYED_SAVE_STRING = "NumberOfGamesPlayed";
-	const string PLAYER_1_WINS_SAVE_STRING = "NumberOfTimesPlayer1Won";
-	const string PLAYER_2_WINS_SAVE_STRING = "NumberOfTimesPlayer2Won";
-	const string NUM_OF_DRAWS_SAVE_STRING = "NumberOfDraws";
+	const string GAME_REPORT_FILE_SAVE_FOLDER = "GameReports/";
+	const string GAME_REPORT_FILE_NAME = "game_report";
 
 };
 

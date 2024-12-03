@@ -1,17 +1,23 @@
 #include "SaveManager.hpp"
 
 #include <iostream>
+#include <fstream>
 
-void SaveManager::save_game_report_to_file(GameStats &gameStats)
+void SaveManager::save_game_report_to_file(string gameReport, string fileType)
 {
-	json gameReportJSON = {
-		{NUM_OF_GAMES_PLAYED_SAVE_STRING, gameStats.get_games_played()},
-		{PLAYER_1_WINS_SAVE_STRING, gameStats.get_p1_wins()},
-		{PLAYER_2_WINS_SAVE_STRING, gameStats.get_p2_wins()},
-		{NUM_OF_DRAWS_SAVE_STRING, gameStats.get_draws()}
-	};
+	cout << "Game Report: " << gameReport << endl;
 
-	string jsonDump = gameReportJSON.dump();
+    ofstream ofstream;
+    ofstream.open(GAME_REPORT_FILE_SAVE_FOLDER + GAME_REPORT_FILE_NAME + "." + fileType);
 
-	cout << "Test dump: " << jsonDump;
+    if (ofstream.is_open())
+    {
+        ofstream << gameReport << endl;
+    }
+    else
+    {
+        cout << "Sorry, the game report file could not be saved." << endl;
+    }
+
+    ofstream.close();
 }
