@@ -8,6 +8,7 @@
 #include "GamemodeInfoHandler.hpp"
 #include "ArchetypeInfoHandler.hpp"
 #include "PlayerArchetypeBuilder.hpp"
+#include "SaveManager.hpp"
 
 using namespace std;
 
@@ -18,6 +19,7 @@ void Game::start_game_loop()
 	MarkerValidator markerValidator = MarkerValidator();
 	GamemodeInfoHandler gamemodeInfoHandler = GamemodeInfoHandler();
 	ArchetypeInfoHandler archetypeInfoHandler = ArchetypeInfoHandler();
+	GameStats gameStats = GameStats();
 
 	cout << "Welcome to Tic-Tac-Toe! \n";
 	cout << endl; // Extra endl for prettiness.
@@ -76,7 +78,8 @@ void Game::start_game_loop()
 
 		cout << endl; // Extra endl for prettiness.
 
-		start_game(board, console, gameState, *playersVector);
+		GameState::State finalState = start_game(board, console, gameState, *playersVector);
+		gameStats.report_game_played(finalState);
 
 		string userResponse;
 
@@ -99,9 +102,14 @@ void Game::start_game_loop()
 
 		delete playersVector;
 	}
+
+	// Once it gets to this point, that means the game was "closed."
+
+	SaveManager saveManager = SaveManager();
+	saveManager.save_game_report_to_file();
 }
 
-void Game::start_game(Board &board, Console &console, GameState &gameState, vector<Player*> &playersVector) {
+GameState::State Game::start_game(Board &board, Console &console, GameState &gameState, vector<Player*> &playersVector) {
 	cout << "~~-~~ Starting Game ~~-~~\n\n";
 	int currentPlayerIndex = 0;
 
@@ -142,7 +150,9 @@ void Game::start_game(Board &board, Console &console, GameState &gameState, vect
 	cout << console.display();
 	cout << "Good game! ";
 
-	switch (gameState.get_current_state())
+	const GameState::State FINAL_STATE = gameState.get_current_state();
+
+	switch (FINAL_STATE)
 	{
 	case GameState::State::Draw:
 		cout << "It was a draw. \n";
@@ -159,6 +169,7 @@ void Game::start_game(Board &board, Console &console, GameState &gameState, vect
 	}
 
 	cout << endl;
+	return FINAL_STATE;
 }
 
 Move Game::get_valid_player_move(Player& currentPlayer, Board& board)

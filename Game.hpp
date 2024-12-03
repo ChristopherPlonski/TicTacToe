@@ -16,7 +16,7 @@ public:
 	void start_game_loop();
 
 private:
-	void start_game(Board &board, Console &console, GameState &gameState, vector<Player*> &playersVector);
+	GameState::State start_game(Board &board, Console &console, GameState &gameState, vector<Player*> &playersVector);
 	Move get_valid_player_move(Player &player, Board &board);
 	Move get_player_move(Player& player);
 	static const int NUM_PLAYERS = 2;
