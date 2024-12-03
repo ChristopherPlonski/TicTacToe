@@ -9,9 +9,17 @@ string GameReportJSON::generate_game_report(GameStats& gameStats, bool makePrett
 		{NUM_OF_DRAWS_JSON_STRING, gameStats.get_draws()}
 	};
 
-	string jsonDump = gameReportJSON.dump();
+	string jsonDump;
 
 	if (makePretty) {
+		jsonDump = gameReportJSON.dump(4);
+	}
+	else {
+		jsonDump = gameReportJSON.dump();
+	}
+
+	// Not needed, just add integer amount argument to the dump() method
+	/*if (makePretty) {
 		string prettyJsonDump;
 
 		for (int i = 0; i < jsonDump.length(); i++) {
@@ -30,7 +38,7 @@ string GameReportJSON::generate_game_report(GameStats& gameStats, bool makePrett
 		}
 
 		jsonDump = prettyJsonDump;
-	}
+	}*/
 
 	return jsonDump;
 }
